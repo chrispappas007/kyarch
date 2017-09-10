@@ -15,8 +15,6 @@
       margin: 0;
       padding: 0;
     }
-
-
   </style>
 
 
@@ -24,22 +22,49 @@
 </head>
 
 <body>
-
+  <div class='grid'>
+    <div class='col col--12'>
+      <div class='h-full prose prose--dark bg-gray'>
+        <h1 class='text-h1 align-center py6'>Where in the Past?<br>Archaeological Cultures in Kentucky</h>
+      </div>
+    </div>
+  </div>
   <div class='grid'>
     <!-- Left column of text -->
+
     <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
-      <div class='h-full prose prose--dark bg-gray scroll-auto'>
-        <h1 class='txt-headline px6 mb6'>Archaeology</h1>
+      <div class='h-full prose prose--dark bg-gray relative scroll-auto'>
+        <!-- <h1 class='txt-headline px6 mb6'>Archaeology</h1> -->
+
         <p>
-  <label for="amount">Years Before Present (BP):</label>
-  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-</p>
+          <label class='pl6' for="amount">Years Before Present (BP):</label>
+          <input class='pl6 ml6' type="text" id="amount" readonly style="border:6; color:#f6931f; font-weight:bold;">
+        </p>
+        <div id="slider-vertical" class='absolute left ml12' style="height:600px;"></div>
+        <div class='bg-orange'>
+          <p class='txt-h3 pt30 px30 ml30'>Paleoindian</p>
+          <p class='txt-h5 pb30 px30 ml30'>+15,000 - 10,000 BP</p>
+        </div>
+        <div class='bg-red'>
+          <p class='txt-h3 pt30 px30 ml30'>Archaic</p>
+          <p class='txt-h5 pb30 px30 ml30'>10,000 - 3,000 BP</p>
+        </div>
+        <div class='bg-blue'>
+          <p class='txt-h3 pt30 px30 ml30'>Woodland</p>
+          <p class='txt-h5 pb30 px30 ml30'>3,000 - 1,000 BP</p>
+        </div>
+        <div class='bg-green'>
+          <p class='txt-h3 pt30 px30 ml30'>Late Prehistoric</p>
+          <p class='txt-h5 pb30 px30 ml30'>1,000 - 300 BP</p>
+        </div>
+        <div class='bg-purple'>
+          <p class='txt-h3 pt30 px30 ml30'>Historic</p>
+          <p class='txt-h5 pb30 px30 ml30'>300 BP - Present</p>
+        </div>
 
-<div id="slider-vertical" class='ml12' style="height:500px;"></div>
-
-        <footer class='mt12 txt-s'>
+        <footer class='mt12 txt-s static bottom'>
           <ul>
-            <li>Map authored by <a class='link' href='https://chrispappas007.github.io/'>Christina Pappas</a></li>
+            <li>For more information visit the <a class='link' href='https://anthropology.as.uky.edu/office-state-archaeology'>Office of State Archaeology</a> and the <a class='link' href='http://heritage.ky.gov/default.htm'>Kentucky Heritage Council</a>.</li>
             </p>
         </footer>
       </div>
@@ -58,24 +83,21 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script>
-    $( function() {
-  $( "#slider-vertical" ).slider({
-    orientation: "vertical",
-    range: "min",
-    min: 0,
-    max: 15000,
-    value: 15000,
-    slide: function( event, ui ) {
-      $( "#amount" ).val( ui.value );
-    }
-  });
-  $( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
-  } );
-  </script>
+      $(function() {
+        $("#slider-vertical").slider({
+          orientation: "vertical",
+          range: "min",
+          min: 0,
+          max: 15000,
+          value: 15000,
+          slide: function(event, ui) {
+            $("#amount").val(ui.value);
+          }
+        });
+        $("#amount").val($("#slider-vertical").slider("value"));
+      });
+    </script>
     <script>
-
-
-
       // mapbox access token for pappas account
       L.mapbox.accessToken = 'pk.eyJ1IjoiY2hyaXNwYXBwYXMwMDciLCJhIjoiY2o2OG5nZ3BlMGlpdzJwbnk1cTM0NG96aSJ9.Or0X37Xo2B4fv9TTMTd2cw';
 
