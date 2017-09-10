@@ -3,141 +3,107 @@
 
 <head>
   <meta charset='utf-8' />
-    <title></title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-  integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-  crossorigin=""/>
+  <title></title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
   <link href="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.min.css" rel="stylesheet">
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #box { position: relative; float:left; top: 0; bottom: 0; width: 30%; }
-        #map { position: relative; float: right; top:0; bottom:0; width:70%; }
-    </style>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /*#box {
+      position: relative;
+      float: left;
+      top: 0;
+      bottom: 0;
+      width: 30%;
+    }
+
+    #map {
+      position: relative;
+      float: right;
+      top: 0;
+      bottom: 0;
+      width: 70%;
+    }*/
+  </style>
 </head>
 
 <body>
 
   <div class='grid'>
-      <!-- Left column of text -->
-      <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
-        <div class='h-full prose prose--dark bg-gray scroll-auto'>
-          <h1 class='txt-headline px6 mb6'>Archaeology</h1>
-            <footer class='mt12 txt-s'>
-              <ul>
-                <li>Map authored by <a class='link' href='https://chrispappas007.github.io/'>Christina Pappas</a></li>
-          </p>
-          </footer>
-        </div>
+    <!-- Left column of text -->
+    <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
+      <div class='h-full prose prose--dark bg-gray scroll-auto'>
+        <h1 class='txt-headline px6 mb6'>Archaeology</h1>
+        <footer class='mt12 txt-s'>
+          <ul>
+            <li>Map authored by <a class='link' href='https://chrispappas007.github.io/'>Christina Pappas</a></li>
+            </p>
+        </footer>
       </div>
-      <div id="map" class='col col--12 col--9-ml h180 h-full-ml viewport-twothirds viewport-full-ml'></div>
+    </div>
+    <div id="map" class='col col--12 col--9-ml h180 h-full-ml viewport-twothirds viewport-full-ml'></div>
 
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-   crossorigin=""></script>
-  <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
-  <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
-  <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script> -->
-  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
-  <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script> -->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
 
 
-  <script>
+    <script>
+      // mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXNwYXBwYXMwMDciLCJhIjoiY2o2OG5nZ3BlMGlpdzJwbnk1cTM0NG96aSJ9.Or0X37Xo2B4fv9TTMTd2cw';
+      // var map = new mapboxgl.Map({
+      //     container: 'map',
+      //     style: 'mapbox://styles/mapbox/dark-v9',
+      //     center: [-84.64, 37.83],
+      //     zoom: 6
+      // });
 
-  // mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXNwYXBwYXMwMDciLCJhIjoiY2o2OG5nZ3BlMGlpdzJwbnk1cTM0NG96aSJ9.Or0X37Xo2B4fv9TTMTd2cw';
-  // var map = new mapboxgl.Map({
-  //     container: 'map',
-  //     style: 'mapbox://styles/mapbox/dark-v9',
-  //     center: [-84.64, 37.83],
-  //     zoom: 6
-  // });
+      // mapbox access token for pappas account
+      L.mapbox.accessToken = 'pk.eyJ1IjoiY2hyaXNwYXBwYXMwMDciLCJhIjoiY2o2OG5nZ3BlMGlpdzJwbnk1cTM0NG96aSJ9.Or0X37Xo2B4fv9TTMTd2cw';
 
-  // mapbox access token for pappas account
-    L.mapbox.accessToken = 'pk.eyJ1IjoiY2hyaXNwYXBwYXMwMDciLCJhIjoiY2o2OG5nZ3BlMGlpdzJwbnk1cTM0NG96aSJ9.Or0X37Xo2B4fv9TTMTd2cw';
+      // create the Leaflet map using mapbox.light tiles
+      var map = L.mapbox.map('map', 'mapbox.light', {
+        zoomSnap: .1,
+        center: [-84.64, 37.83],
+        zoom: 7,
 
-    // create the Leaflet map using mapbox.light tiles
-    var map = L.mapbox.map('map', 'mapbox.light', {
-      zoomSnap: .1,
-      center: [-84.64, 37.83],
-      zoom: 7,
+      });
 
-  });
+      $.getJSON("data/hexgrid-filtered.geojson", function(data) {
 
-  $.getJSON("data/hexgrid-filtered.geojson", function(data) {
-
-    console.log(data);
-  //draw the info box in topright corner
-  //drawInfo();
-  // draw the map using GeoJSON data
-  drawMap(data);
-});
-//begin drawMap function
-function drawMap(data) {
-  // create Leaflet data layer and add to map
-  var dataLayer = L.geoJson(data, {
-    style: function(feature) {
-      // style counties with initial default path options
-      return {
-        color: '#dddddd',
-        weight: 2,
-        fillOpacity: 1,
-        fillColor: '#1f78b4'
-      };
-    }
-  }).addTo(map);//add it to the map
-  map.fitBounds(dataLayer.getBounds());//have the map drawn to fit window
-}
-
-  // var width = 900,
-  //   height = 600;
-  // var svg = d3.select("#map")
-  //   .append("svg")
-  //   .attr("width", width)
-  //   .attr("height", height);
-  // var projection = d3.geo.albers()
-  //   .scale(1200)
-  //   .translate([width / 2, height / 2]);
-  // var geoPath = d3.geo.path()
-  //   .projection(projection);
-  //
-  //   //data files waiting to be called
-  //    queue()
-  //      .defer(d3.json, 'data/hexgrid-filtered.geojson')
-  //      .await(makeMap);
-  //
-  //      function makeMap(error, sites) { //send parameters into map
-  //        console.log(sites) //have access to sites
-  //
-  //        svg.append("g") //draw sites
-  //    .selectAll("path")
-  //    .data(sites.features)
-  //    .enter()
-  //    .append("path")
-  //    .attr("d", geoPath)
-  //    //.attr("class", "land");
-  //  }
-  // map options
-// var options = {
-//   scrollWheelZoom: true,
-//   center: [-84.64, 37.83],
-//   zoomSnap: .1,
-//   dragging: true,
-//   zoomControl: false
-// }
-// // create the Leaflet map
-// var map = L.map('map', options);
-// request tiles and add to map
-// var tiles = L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}', {
-//   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-//   subdomains: 'abcd',
-//   ext: 'png'
-// }).addTo(map);
-
-  </script>
+        console.log(data);
+        //draw the info box in topright corner
+        //drawInfo();
+        // draw the map using GeoJSON data
+        drawMap(data);
+      });
+      //begin drawMap function
+      function drawMap(data) {
+        // create Leaflet data layer and add to map
+        var dataLayer = L.geoJson(data, {
+          style: function(feature) {
+            // style counties with initial default path options
+            return {
+              color: '#dddddd',
+              weight: 2,
+              fillOpacity: 1,
+              fillColor: '#1f78b4'
+            };
+          }
+        }).addTo(map); //add it to the map
+        map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
+      }
+    </script>
 
 
 </body>
