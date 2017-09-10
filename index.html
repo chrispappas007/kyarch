@@ -42,6 +42,8 @@
   <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script> -->
   <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
   <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
 
 
   <script>
@@ -65,6 +67,59 @@
 
   });
 
+  $.getJSON("data/hexgrid-filtered.geojson", function(data) {
+
+    console.log(data);
+  //draw the info box in topright corner
+  //drawInfo();
+  // draw the map using GeoJSON data
+  drawMap(data);
+});
+//begin drawMap function
+function drawMap(data) {
+  // create Leaflet data layer and add to map
+  var dataLayer = L.geoJson(data, {
+    style: function(feature) {
+      // style counties with initial default path options
+      return {
+        color: '#dddddd',
+        weight: 2,
+        fillOpacity: 1,
+        fillColor: '#1f78b4'
+      };
+    }
+  }).addTo(map);//add it to the map
+  map.fitBounds(dataLayer.getBounds());//have the map drawn to fit window
+}
+
+  // var width = 900,
+  //   height = 600;
+  // var svg = d3.select("#map")
+  //   .append("svg")
+  //   .attr("width", width)
+  //   .attr("height", height);
+  // var projection = d3.geo.albers()
+  //   .scale(1200)
+  //   .translate([width / 2, height / 2]);
+  // var geoPath = d3.geo.path()
+  //   .projection(projection);
+  //
+  //   //data files waiting to be called
+  //    queue()
+  //      .defer(d3.json, 'data/hexgrid-filtered.geojson')
+  //      .await(makeMap);
+  //
+  //      function makeMap(error, sites) { //send parameters into map
+  //        console.log(sites) //have access to sites
+  //
+  //        svg.append("g") //draw sites
+  //    .selectAll("path")
+  //    .data(sites.features)
+  //    .enter()
+  //    .append("path")
+  //    .attr("d", geoPath)
+  //    //.attr("class", "land");
+  //  }
   // map options
 // var options = {
 //   scrollWheelZoom: true,
