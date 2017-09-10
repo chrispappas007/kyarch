@@ -3,7 +3,7 @@
 
 <head>
   <meta charset='utf-8' />
-  <title></title>
+  <title>KY Archaeological Cultures</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
   <link href="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.min.css" rel="stylesheet">
@@ -40,26 +40,26 @@
           <label class='pl6' for="amount">Years Before Present (BP):</label>
           <input class='pl6 ml6' type="text" id="amount" readonly style="border:6; color:#f6931f; font-weight:bold;">
         </p>
-        <div id="slider-vertical" class='absolute left ml12' style="height:600px;"></div>
+        <div id="slider-vertical" class='absolute left ml12' style="height:575px;"></div>
         <div class='bg-orange'>
-          <p class='txt-h3 pt30 px30 ml30'>Paleoindian</p>
-          <p class='txt-h5 pb30 px30 ml30'>+15,000 - 10,000 BP</p>
+          <p class='txt-h3 pt24 px30 ml30'>Paleoindian</p>
+          <p class='txt-h5 pb24 px30 ml30'>+15,000 - 10,000 BP</p>
         </div>
         <div class='bg-red'>
-          <p class='txt-h3 pt30 px30 ml30'>Archaic</p>
-          <p class='txt-h5 pb30 px30 ml30'>10,000 - 3,000 BP</p>
+          <p class='txt-h3 pt24 px30 ml30'>Archaic</p>
+          <p class='txt-h5 pb24 px30 ml30'>10,000 - 3,000 BP</p>
         </div>
         <div class='bg-blue'>
-          <p class='txt-h3 pt30 px30 ml30'>Woodland</p>
-          <p class='txt-h5 pb30 px30 ml30'>3,000 - 1,000 BP</p>
+          <p class='txt-h3 pt24 px30 ml30'>Woodland</p>
+          <p class='txt-h5 pb24 px30 ml30'>3,000 - 1,000 BP</p>
         </div>
         <div class='bg-green'>
-          <p class='txt-h3 pt30 px30 ml30'>Late Prehistoric</p>
-          <p class='txt-h5 pb30 px30 ml30'>1,000 - 300 BP</p>
+          <p class='txt-h3 pt24 px30 ml30'>Late Prehistoric</p>
+          <p class='txt-h5 pb24 px30 ml30'>1,000 - 300 BP</p>
         </div>
         <div class='bg-purple'>
-          <p class='txt-h3 pt30 px30 ml30'>Historic</p>
-          <p class='txt-h5 pb30 px30 ml30'>300 BP - Present</p>
+          <p class='txt-h3 pt24 px30 ml30'>Historic</p>
+          <p class='txt-h5 pb24 px30 ml30'>300 BP - Present</p>
         </div>
 
         <footer class='mt12 txt-s static bottom'>
@@ -126,7 +126,7 @@
             return {
               color: '#dddddd',
               weight: 2,
-              fillOpacity: 1,
+              fillOpacity: .5,
               fillColor: '#1f78b4'
             };
           }
