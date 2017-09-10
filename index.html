@@ -113,66 +113,66 @@
       });
 
       var attributeValue = "PALEO",
-          normValue = "ARCHAIC";
+        normValue = "ARCHAIC";
 
       $.getJSON("data/hexgrid-filtered.geojson", function(cult) {
 
-        console.log(cult);
+          console.log(cult);
 
-        Papa.parse('data/period.csv', {
-          download: true,
-          header: true,
-          complete: function(time) {
-            //console.log(data);
-            console.log(time);
+          Papa.parse('data/period.csv', {
+            download: true,
+            header: true,
+            complete: function(time) {
+              //console.log(data);
+              console.log(time);
 
-            //call processData function to attach json object geometry
-            processData(cult, time);
-          }
-        })
-        //console.log(counties);
+              //call processData function to attach json object geometry
+              processData(cult, time);
+            }
+          })
+          //console.log(counties);
         })
         //console log statement in case parsing doesn't work
         .fail(function() {
-        console.log("Houston, we have a problem.");
+          console.log("Houston, we have a problem.");
 
-      });
+        });
 
       //begin processData function
-    function processData(cult, time) {
-      //modified for loop to loop through object features and associate with geometry - match by fips code
-      for (var cultu in cult.features) { //outer loop
-        var props = cult.features[cultu].properties;
-        for (d in time.data) { //inner loop
-          //console.log('county fip: ', props.GEOID);
-          //console.log('data fip: ', data.data[d].STATE_FIP + data.data[d].COUNTY_FIP);
-          if (props == time.data[d].PERIOD) {
-            cult.features[cult].properties = time.data[d];
+      function processData(cult, time) {
+        //modified for loop to loop through object features and associate with geometry - match by fips code
+        for (var cultu in cult.features) { //outer loop
+          var props = cult.features[cultu].properties;
+          for (d in time.data) { //inner loop
+            //console.log('county fip: ', props.GEOID);
+            //console.log('data fip: ', data.data[d].STATE_FIP + data.data[d].COUNTY_FIP);
+            if (props == time.data[d].PERIOD) {
+              cult.features[cult].properties = time.data[d];
+            }
           }
-        }
-      };
-      //console.log('after: ', counties);
-      //create classification breaks - doing this in processData function because they only need to happen once in this map
-      var rates = []; //empty array to hold the values
-      cult.features.map(function(cult) { //go through all the counties
-        for (var prop in cult.properties) { //go through all the properties in each county
-          if ($(cult.properties[props]) == 'PERIOD') { //verify it's an Unemployment value value and not a fips value
-            rates.push(Number(time.data.MAX)); //returns the value as a number to empty array
+        };
+        //console.log('after: ', counties);
+        //create classification breaks - doing this in processData function because they only need to happen once in this map
+        var rates = []; //empty array to hold the values
+        cult.features.map(function(cult) { //go through all the counties
+          for (var prop in cult.properties) { //go through all the properties in each county
+            if ($(cult.properties[props]) == 'PERIOD') { //verify it's an Unemployment value value and not a fips value
+              rates.push(Number(time.data.MAX)); //returns the value as a number to empty array
+            }
           }
-        }
 
-      });
-      //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
-      var breaks = chroma.limits(rates, 'q', 5);
-      //map colors to breaks
-      var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
-      // verify the result!
-      //console.log(rates);
-      //call draw map sending counties and colorize as parameters
-      drawMap(cult, colorize);
-      //call drawLegend sending breaks and colorize as parameters
-      //drawLegend(breaks, colorize);
-    } //end processData
+        });
+        //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
+        var breaks = chroma.limits(rates, 'q', 5);
+        //map colors to breaks
+        var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
+        // verify the result!
+        //console.log(rates);
+        //call draw map sending counties and colorize as parameters
+        drawMap(cult, colorize);
+        //call drawLegend sending breaks and colorize as parameters
+        //drawLegend(breaks, colorize);
+      } //end processData
 
 
       //begin drawMap function
@@ -195,21 +195,21 @@
         updateMap(dataLayer, colorize, '12000');
       }
 
-      function updateMap(dataLayer, colorize, currentYear)  {
+      function updateMap(dataLayer, colorize, currentYear) {
 
         dataLayer.eachLayer(function(layer) {
-        //console.log(layer.feature.properties);
-        //console.log(layer.feature.properties[currentYear]);
-        //color the layer based on the color mapping defined in processData based on the selected year
-        layer.setStyle({
-          fillColor: colorize(layer.feature.properties[currentYear])
+          //console.log(layer.feature.properties);
+          //console.log(layer.feature.properties[currentYear]);
+          //color the layer based on the color mapping defined in processData based on the selected year
+          layer.setStyle({
+            fillColor: colorize(layer.feature.properties[currentYear])
+          });
         });
-      });
       }
 
-      function sliderUI(dataLayer, colorize)  {
+      function sliderUI(dataLayer, colorize) {
 
-          $("#slider-vertical") //select our input element from the DOM element ui-controls
+        $("#slider-vertical") //select our input element from the DOM element ui-controls
           .on("input change", function() { //when the input element is changed
             var currentYear = $(this).val(); //the new input value is received
             updateMap(dataLayer, colorize, currentYear); //assign it to currentYear and call updateMap
@@ -217,8 +217,6 @@
           });
 
       }
-
-
     </script>
 
 
