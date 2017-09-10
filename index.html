@@ -76,12 +76,9 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
     <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script> -->
-    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://unpkg.com/simple-statistics@2.2.0/dist/simple-statistics.min.js"></script>
+    <!-- <script src="https://unpkg.com/simple-statistics@2.2.0/dist/simple-statistics.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
 
@@ -126,11 +123,11 @@
               //console.log(data);
               console.log(time);
 
-              //call processData function to attach json object geometry
+              //call processData function
               processData(cult, time);
             }
           })
-          //console.log(counties);
+          //console.log(cult);
         })
         //console log statement in case parsing doesn't work
         .fail(function() {
@@ -140,23 +137,21 @@
 
       //begin processData function
       function processData(cult, time) {
-        //modified for loop to loop through object features and associate with geometry - match by fips code
+        //modified for loop to loop through object features and associate with geometry
         for (var cultu in cult.features) { //outer loop
           var props = cult.features[cultu].properties;
           for (d in time.data) { //inner loop
-            //console.log('county fip: ', props.GEOID);
-            //console.log('data fip: ', data.data[d].STATE_FIP + data.data[d].COUNTY_FIP);
+
             if (props == time.data[d].PERIOD) {
               cult.features[cult].properties = time.data[d];
             }
           }
         };
-        //console.log('after: ', counties);
         //create classification breaks - doing this in processData function because they only need to happen once in this map
         var rates = []; //empty array to hold the values
-        cult.features.map(function(cult) { //go through all the counties
-          for (var prop in cult.properties) { //go through all the properties in each county
-            if ($(cult.properties[props]) == 'PERIOD') { //verify it's an Unemployment value value and not a fips value
+        cult.features.map(function(cult) { //go through all the hexagons
+          for (var prop in cult.properties) { //go through all the properties in each hexagon
+            if ($(cult.properties[props]) == 'PERIOD') {
               rates.push(Number(time.data.MAX)); //returns the value as a number to empty array
             }
           }
@@ -167,8 +162,8 @@
         //map colors to breaks
         var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
         // verify the result!
-        //console.log(rates);
-        //call draw map sending counties and colorize as parameters
+        console.log(rates);
+        //call draw map sending cult and colorize as parameters
         drawMap(cult, colorize);
         //call drawLegend sending breaks and colorize as parameters
         //drawLegend(breaks, colorize);
