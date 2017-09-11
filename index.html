@@ -31,10 +31,6 @@
       color: whitesmoke;
       margin: 0;
     }
-    .legend h3 span {
-      font-size: 1.3em;
-      margin: 0 20px 0 0;
-    }
     .legend ul {
       list-style-type: none;
       padding: 0;
@@ -52,8 +48,6 @@
 
   </style>
 
-
-
 </head>
 
 <body>
@@ -69,10 +63,7 @@
 
     <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
       <div class='h-full prose prose--dark bg-gray relative scroll-auto'>
-        <!-- <h1 class='txt-headline px6 mb6'>Archaeology</h1> -->
-
         <div id="slider-vertical" class='absolute right mr12' style="height:575px;">
-          <!-- <input type="range" min = "1", max= "9", step= "1"> -->
         </div>
         <div class='bg-orange'>
           <p class='txt-h3 pt24 px30 ml30'>Paleoindian</p>
@@ -124,6 +115,7 @@
         zoomSnap: .1,
         center: [-84.64, 37.83],
         zoom: 7,
+        zoomControl: false,
 
       });
 
@@ -203,6 +195,8 @@
           layer.setStyle({
             fillColor: colorize(layer.feature.properties[currentPeriod])
           });
+          var popupInfo = "<b>Paleoindian (+12,000 - 10,000BP)</b><br>" + "<ul><li>Arrived at the end of the last ice age, perhaps earlier</li>" + "<li>Hunted megafauna such as mammoth, mastodon, and giant bison</li>" + "<li>Lived in small groups and moved frequently</li>" + "<li>Made large, well-crafted spear points</li>" + "<li>Little known about ritual or ceremonial life</li></ul><br>" + "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a>."
+          layer.bindPopup(popupInfo);
         });
       }
 
@@ -234,6 +228,7 @@
           .on("input change", function() { //when the input element is changed
             var currentPeriod = periodMap[$(this).val()]; //the new input value is received
             updateMap(dataLayer, colorize, currentPeriod); //assign it to currentYear and call updateMap
+            //I know i need to call an ajax request to update the popup with the new selection, BUT how do I tell it to update with the popups that are specific to each period? I can write the popups for each period, but how do I tell it to associate with each one?
           });
       } // end createSliderUI()
 
@@ -241,7 +236,7 @@
     function drawLegend(breaks, colorize) {
       //create leaflet control object
       var legendControl = L.control({
-        position: 'topright'
+        position: 'topleft'
       });
       legendControl.onAdd = function(map) { //once the object is added to the map
         var legend = L.DomUtil.create('div', 'legend'); //create a new division element on the map
@@ -249,7 +244,7 @@
       };
       legendControl.addTo(map); //add the legend control to the map
       //select the legend and add a heading and the ranges
-      var legend = $('.legend').html("<h3>Archaeological Site Density</h3><ul>");
+      var legend = $('.legend').html("<h3>Site Density</h3><ul>");
       //loop through the break values created in processData
       for (var i = 0; i < breaks.length - 1; i++) {
         //grab the color for each break
