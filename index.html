@@ -53,6 +53,7 @@
       float: left;
       margin-right: 10px;
     }
+
   </style>
 
 </head>
@@ -98,9 +99,14 @@
         </footer>
       </div>
     </div>
-    <div id="map" class='col col--12 col--9-ml h180 h-full-ml viewport-twothirds viewport-full-ml'></div>
+    <div id="map" class='col col--12 col--9-ml h180 viewport-twothirds viewport-full-ml'></div>
+    <div id="summary-info">
+      <div id="time-period">  </div>
+      <div id="period-summary"></div>
+      <div id="period-link"></div>
+    </div>
 
-    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script> -->
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
@@ -129,6 +135,21 @@
         "3" : ["WOODLAND", "EWOOD", "MWOOD", "LWOOD"],
         "2" : ["LWMISS", "LATEPRE1", "LATEPRE2", "LATEPRE3"],
         "1" : ["HISTORIC"]
+      };
+
+      var summaryMap = {
+        "5" : "Paleoindian",
+        "4" : "Archaic",
+        "3" : "",
+        "2" : "",
+        "1" : ""
+      };
+
+
+      var summaryInfo = {
+        "PaleoIndian": {
+            "info": 'Arrived at the end of the last ice age, perhaps earlier Hunted megafauna such as mammoth, mastodon, and giant bison',
+        }
       };
 
         //AJAX request to load data
@@ -223,12 +244,26 @@
             max: 5,
             value: 5,
             slide: function(event, ui) {
-              updateMap(dataLayer, ui.value)
+              updateMap(dataLayer, ui.value);
+              updateSummaryInfo(ui.value);
             }
           });
         //once the object is added to the map
 
       } // end sliderUI()
+
+
+    function updateSummaryInfo(val) {
+
+        var timePeriod = $("#time-period"),
+            periodOverview = $('#<div id="time-period"></div>');
+
+        var periodName = summaryMap[val];
+
+        timePeriod.html(summaryInfo[periodName].info);
+
+
+    }
 
       //begin drawLegend
     function drawLegend(breaks, colorize) {
