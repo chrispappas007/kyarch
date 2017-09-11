@@ -9,13 +9,16 @@
   <link href="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.min.css" rel="stylesheet">
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
 
   <style>
     body {
       margin: 0;
       padding: 0;
     }
-
+    .title-box h1 {
+      font-family: Merriweather, sans-serif;
+    }
     .legend {
       padding: 6px 8px;
       font-size: 1em;
@@ -58,33 +61,33 @@
   <div class='grid'>
     <div class='col col--12'>
       <div class='h-full prose prose--dark bg-gray'>
-        <h1 class='text-h1 align-center py6'>Where in the Past?<br>Archaeological Cultures in Kentucky</h>
+        <h1 id="title-box" class='text-h1 align-center py6'>Where in the Past?<br>Archaeological Cultures in Kentucky</h>
       </div>
     </div>
   </div>
   <div class='grid'>
     <!-- Left column of text -->
     <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
-      <div class='h-full prose prose--dark bg-gray relative scroll-auto'>
+      <div class='h-full prose prose--dark bg-gray color-gray-dark relative scroll-auto'>
         <div id="slider-vertical" class='absolute right mr12' style="height:575px;">
         </div>
-        <div class='bg-orange'>
+        <div class='bg-yellow-faint'>
           <p class='txt-h3 pt24 px30 ml30'>Paleoindian</p>
           <p class='txt-h5 pb24 px30 ml30'>+12,000 - 10,000 BP</p>
         </div>
-        <div class='bg-red'>
+        <div class='bg-green-light'>
           <p class='txt-h3 pt24 px30 ml30'>Archaic</p>
           <p class='txt-h5 pb24 px30 ml30'>10,000 - 3,000 BP</p>
         </div>
-        <div class='bg-blue'>
+        <div class='bg-blue-light'>
           <p class='txt-h3 pt24 px30 ml30'>Woodland</p>
           <p class='txt-h5 pb24 px30 ml30'>3,000 - 1,000 BP</p>
         </div>
-        <div class='bg-green'>
+        <div class='bg-blue'>
           <p class='txt-h3 pt24 px30 ml30'>Late Prehistoric</p>
           <p class='txt-h5 pb24 px30 ml30'>1,000 - 300 BP</p>
         </div>
-        <div class='bg-purple'>
+        <div class='bg-blue-dark'>
           <p class='txt-h3 pt24 px30 ml30'>Historic</p>
           <p class='txt-h5 pb24 px30 ml30'>300 BP - Present</p>
         </div>
@@ -134,6 +137,8 @@
       //global normalizing variables
       var attributeValue = "PALEO",
         normValue = "ARCHAIC";
+
+
 
         //AJAX request to load data
       $.getJSON("data/hexgridonedeg.json", function(cult) {
@@ -209,9 +214,9 @@
         });
         //once the object is added to the map
         sliderControl.onAdd = function(map) {
-          var slider = L.DomUtil.get("#slider-vertical"); //selects the DOM element ui-controls
-          L.DomEvent.disableScrollPropagation(slider); //turn off scrolling while using the control object
-          L.DomEvent.disableClickPropagation(slider); //turn off clicking while using the control object
+          var slider = $.get("#slider-vertical"); //selects the DOM element slider
+          $.disableScrollPropagation(slider); //turn off scrolling while using the control object
+          $.disableClickPropagation(slider); //turn off clicking while using the control object
           return slider; //returns the slider
         }
         sliderControl.addTo(map); //adds the slider control object to map
