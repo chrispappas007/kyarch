@@ -53,6 +53,7 @@
       float: left;
       margin-right: 10px;
     }
+
   </style>
 
 </head>
@@ -69,7 +70,7 @@
     <!-- Left column of text -->
     <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
       <div class='h-full prose prose--dark bg-gray color-gray-dark relative scroll-auto'>
-        <div id="slider-vertical" class='absolute right mr12' style="height:575px;">
+        <div id="slider-vertical" class='absolute right mr12 mt36' style="height:530px;">
         </div>
         <div class='bg-yellow-faint'>
           <p class='txt-h3 pt24 px30 ml30'>Paleoindian</p>
@@ -98,9 +99,14 @@
         </footer>
       </div>
     </div>
-    <div id="map" class='col col--12 col--9-ml h180 h-full-ml viewport-twothirds viewport-full-ml'></div>
+    <div id="map" class='col col--12 col--9-ml h180 viewport-twothirds viewport-full-ml'></div>
+    <div id="summary-info">
+      <div id="time-period">  </div>
+      <div id="period-summary"></div>
+      <div id="period-link"></div>
+    </div>
 
-    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script> -->
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
@@ -124,30 +130,32 @@
       });
       //variable to associate periods with stops on the slider
       var periodMap = {
-        "1" : ["PALEO", "EPALEO", "LPALEO"],
-        "2" : "EARCH",
-        "3" : "MARCH",
-        "4" : ["ARCHAIC", "LARCH"],
-        "5" : "EWOOD",
-        "6" : "MWOOD",
-        "7" : ["LWOOD", "WOODLAND"],
-        "8" : ["LWMISS", "LATEPRE1", "LATEPRE2", "LATEPRE3"],
-        "9" : "HISTORIC"
+        "5" : ["PALEO", "EPALEO", "LPALEO"],
+        "4" : ["ARCHAIC", "EARCH", "MARCH", "LARCH"],
+        "3" : ["WOODLAND", "EWOOD", "MWOOD", "LWOOD"],
+        "2" : ["LWMISS", "LATEPRE1", "LATEPRE2", "LATEPRE3"],
+        "1" : ["HISTORIC"]
       };
-      //global normalizing variables
-      var attributeValue = "PALEO",
-        normValue = "ARCHAIC";
+
+      var summaryMap = {
+        "5" : "Paleoindian",
+        "4" : "Archaic",
+        "3" : "",
+        "2" : "",
+        "1" : ""
+      };
 
 
+      var summaryInfo = {
+        "PaleoIndian": {
+            "info": 'Arrived at the end of the last ice age, perhaps earlier Hunted megafauna such as mammoth, mastodon, and giant bison',
+        }
+      };
 
         //AJAX request to load data
       $.getJSON("data/hexgridonedeg.json", function(cult) {
-
-          console.log(cult);//log data to console
-              drawMap(cult);//call draw map
-            }
-          )
-          //console.log(cult);
+        drawMap(cult);//call draw map
+      });
 
       //begin drawMap function
       function drawMap(cult) {
@@ -163,70 +171,99 @@
             };
           }
         }).addTo(map); //add it to the map
+        
         map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
 
-        // create empty Array for storing values
-  			var values = [];
-  			// loop through all the counties
-  			dataLayer.eachLayer(function(layer) {
-  				var value = layer.feature.properties[attributeValue] / layer.feature.properties[normValue];
-  				values.push(value); // push the normalized value for each layer into the Array
-  			});
-
-        //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
-        var breaks = chroma.limits(values, 'q', 5);
-        //map colors to breaks
-        var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
-        // verify the result!
-        //console.log(values);
-        drawLegend(breaks, colorize);
-        sliderUI(dataLayer, colorize);
-        updateMap(dataLayer, colorize, '1');
+        // drawLegend(breaks, colorize);
+        sliderUI(dataLayer);
+        updateMap(dataLayer, '1');  // start with oldest time period first?
       }
 
-      //update function to update map
-      function updateMap(dataLayer, colorize, currentPeriod) {
+      function getClassBreaks(dataLayer, currentPeriod) {
+        
+          // empty array to hold our values
+          var values = [];
+    
+          // loop through the current period's arrays ("PALEO", "EPALEO", "LPALEO")
+          periodMap[currentPeriod].forEach(function(period) {
+    
+            // for each one
+            // loop through each hexagon
+            dataLayer.eachLayer(function(layer) {
+    
+              var props = layer.feature.properties;
+              // if it has a value greater than one
+              if(props[period] > 0) {
+                // add it to our 
+                values.push(props[period])
+              }
+    
+            })
+    
+          });
 
+      // //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
+      var breaks = chroma.limits(values, 'k', 7 );
+
+      return breaks;
+
+    }
+
+      //update function to update map
+      function updateMap(dataLayer, currentPeriod) {
+
+        var breaks = getClassBreaks(dataLayer, currentPeriod);
+        
+        var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
+  
         dataLayer.eachLayer(function(layer) {//cycle through each layer
-          //console.log(layer.feature.properties);
-          //console.log(layer.feature.properties[currentYear]);
-          //color the layer based on the color mapping defined in drawMap based on the selected periodMap
+  
+          var props = layer.feature.properties,
+              currentTotalValue = 0;
+          
+          periodMap[currentPeriod].forEach(function(period) {
+              currentTotalValue += props[period];
+          });
+  
           layer.setStyle({//for each layer set style
-            fillColor: colorize(layer.feature.properties[currentPeriod])
+            fillColor: colorize(currentTotalValue)
           });
           //Declare a popup variable and provide info - see below in sliderUI about how to call an update??
-          var popupInfo = "<b>Paleoindian (+12,000 - 10,000BP)</b><br>" + "<ul><li>Arrived at the end of the last ice age, perhaps earlier</li>" + "<li>Hunted megafauna such as mammoth, mastodon, and giant bison</li>" + "<li>Lived in small groups and moved frequently</li>" + "<li>Made large, well-crafted spear points</li>" + "<li>Little known about ritual or ceremonial life</li></ul><br>" + "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a>."
-          layer.bindPopup(popupInfo);//bind popup to map
+          // var popupInfo = "<b>Paleoindian (+12,000 - 10,000BP)</b><br>" + "<ul><li>Arrived at the end of the last ice age, perhaps earlier</li>" + "<li>Hunted megafauna such as mammoth, mastodon, and giant bison</li>" + "<li>Lived in small groups and moved frequently</li>" + "<li>Made large, well-crafted spear points</li>" + "<li>Little known about ritual or ceremonial life</li></ul><br>" + "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a>."
+          // layer.bindPopup(popupInfo);//bind popup to map
         });
       }
 
       //begin sliderUI
       function sliderUI(dataLayer, colorize) {
         //variable to hold ajax request to select slider div and give it some attributes
-        var sliderControl = $(function() {
           $("#slider-vertical").slider({
             orientation: "vertical",
             range: "min",
             min: 1,
-            max: 9,
-            value: 1
+            max: 5,
+            value: 5,
+            slide: function(event, ui) {
+              updateMap(dataLayer, ui.value);
+              // updateSummaryInfo(ui.value);
+            }
           });
-        });
         //once the object is added to the map
-        sliderControl.onAdd = function(map) {
-          var slider = $.get("#slider-vertical"); //selects the DOM element slider
-          $.disableScrollPropagation(slider); //turn off scrolling while using the control object
-          $.disableClickPropagation(slider); //turn off clicking while using the control object
-          return slider; //returns the slider
-        }
-        sliderControl.addTo(map); //adds the slider control object to map
-        $("#slider-vertical") //select our input element from the DOM element slider
-          .on("input change", function() { //when the input element is changed
-            var currentPeriod = periodMap[$(this).val()]; //the new input value is received
-            updateMap(dataLayer, colorize, currentPeriod); //assign it to currentPeriod and call updateMap
-            //I know i need to call an ajax request to update the popup with the new selection, BUT how do I tell it to update with the popups that are specific to each period? I can write the popups for each period, but how do I tell it to associate with each one?
-          });
-      } // end createSliderUI()
+
+      } // end sliderUI()
+
+
+    function updateSummaryInfo(val) {
+
+        var timePeriod = $("#time-period"),
+            periodOverview = $('#<div id="time-period"></div>');
+
+        var periodName = summaryMap[val];
+
+        timePeriod.html(summaryInfo[periodName].info);
+
+
+    }
 
       //begin drawLegend
     function drawLegend(breaks, colorize) {
