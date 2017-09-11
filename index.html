@@ -36,11 +36,9 @@
       <div class='h-full prose prose--dark bg-gray relative scroll-auto'>
         <!-- <h1 class='txt-headline px6 mb6'>Archaeology</h1> -->
 
-        <p>
-          <label class='pl6' for="amount">Years Before Present (BP):</label>
-          <input class='pl6 ml6' type="text" id="amount" readonly style="border:6; color:#f6931f; font-weight:bold;">
-        </p>
-        <div id="slider-vertical" class='absolute right mr12' style="height:575px;"></div>
+        <div id="slider-vertical" class='absolute right mr12' style="height:575px;">
+          <!-- <input type="range" min = "1", max= "9", step= "1"> -->
+        </div>
         <div class='bg-orange'>
           <p class='txt-h3 pt24 px30 ml30'>Paleoindian</p>
           <p class='txt-h5 pb24 px30 ml30'>+12,000 - 10,000 BP</p>
@@ -82,21 +80,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
 
-    <script>
+    <!-- <script>
       $(function() {
         $("#slider-vertical").slider({
           orientation: "vertical",
           range: "min",
-          min: 0,
-          max: 15000,
-          value: 15000,
+          min: 1,
+          max: 9,
+          value: 1,
           slide: function(event, ui) {
             $("#amount").val(ui.value);
           }
         });
         $("#amount").val($("#slider-vertical").slider("value"));
       });
-    </script>
+    </script> -->
     <script>
       // mapbox access token for pappas account
       L.mapbox.accessToken = 'pk.eyJ1IjoiY2hyaXNwYXBwYXMwMDciLCJhIjoiY2o2OG5nZ3BlMGlpdzJwbnk1cTM0NG96aSJ9.Or0X37Xo2B4fv9TTMTd2cw';
@@ -109,26 +107,31 @@
 
       });
 
+      var periodMap = {
+        "1" : ["PALEO", "EPALEO", "LPALEO"],
+        "2" : "EARCH",
+        "3" : "MARCH",
+        "4" : ["ARCHAIC", "LARCH"],
+        "5" : "EWOOD",
+        "6" : "MWOOD",
+        "7" : ["LWOOD", "WOODLAND"],
+        "8" : ["LWMISS", "LATEPRE1", "LATEPRE2", "LATEPRE3"],
+        "9" : "HISTORIC"
+      };
+
       var attributeValue = "PALEO",
         normValue = "ARCHAIC";
 
-      $.getJSON("data/hexgrid-filtered.geojson", function(cult) {
+      $.getJSON("data/hexgridonedeg.json", function(cult) {
 
           console.log(cult);
-
-          Papa.parse('data/period.csv', {
-            download: true,
-            header: true,
-            complete: function(time) {
-              //console.log(data);
-              console.log(time);
-
+              drawMap(cult);
               //call processData function
-              processData(cult, time);
+              //processData(cult);
             }
-          })
+          )
           //console.log(cult);
-        })
+
         //console log statement in case parsing doesn't work
         .fail(function() {
           console.log("Houston, we have a problem.");
@@ -136,42 +139,16 @@
         });
 
       //begin processData function
-      function processData(cult, time) {
-        //modified for loop to loop through object features and associate with geometry
-        for (var cultu in cult.features) { //outer loop
-          var props = cult.features[cultu].properties;
-          for (d in time.data) { //inner loop
+      function processData(cult) {
 
-            if (props == time.data[d].PERIOD) {
-              cult.features[cult].properties = time.data[d];
-            }
-          }
-        };
-        //create classification breaks - doing this in processData function because they only need to happen once in this map
-        var rates = []; //empty array to hold the values
-        cult.features.map(function(cult) { //go through all the hexagons
-          for (var prop in cult.properties) { //go through all the properties in each hexagon
-            if ($(cult.properties[props]) == 'PERIOD') {
-              rates.push(Number(time.data.MAX)); //returns the value as a number to empty array
-            }
-          }
 
-        });
-        //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
-        var breaks = chroma.limits(rates, 'q', 5);
-        //map colors to breaks
-        var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
-        // verify the result!
-        console.log(rates);
-        //call draw map sending cult and colorize as parameters
-        drawMap(cult, colorize);
         //call drawLegend sending breaks and colorize as parameters
         //drawLegend(breaks, colorize);
       } //end processData
 
 
       //begin drawMap function
-      function drawMap(cult, colorize) {
+      function drawMap(cult) {
         // create Leaflet data layer and add to map
         var dataLayer = L.geoJson(cult, {
           style: function(feature) {
@@ -186,32 +163,70 @@
         }).addTo(map); //add it to the map
         map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
 
+        // create empty Array for storing values
+  			var values = [];
+  			// loop through all the counties
+  			dataLayer.eachLayer(function(layer) {
+  				var value = layer.feature.properties[attributeValue] / layer.feature.properties[normValue];
+  				values.push(value); // push the normalized value for each layer into the Array
+  			});
+
+                //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
+        var breaks = chroma.limits(values, 'q', 5);
+        //map colors to breaks
+        var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
+        // verify the result!
+        //console.log(values);
+        //call draw map sending cult and colorize as parameters
+
         sliderUI(dataLayer, colorize);
-        updateMap(dataLayer, colorize, '12000');
+        updateMap(dataLayer, colorize, '1');
       }
 
-      function updateMap(dataLayer, colorize, currentYear) {
+      function updateMap(dataLayer, colorize, currentPeriod) {
 
         dataLayer.eachLayer(function(layer) {
           //console.log(layer.feature.properties);
           //console.log(layer.feature.properties[currentYear]);
           //color the layer based on the color mapping defined in processData based on the selected year
           layer.setStyle({
-            fillColor: colorize(layer.feature.properties[currentYear])
+            fillColor: colorize(layer.feature.properties[currentPeriod])
           });
         });
       }
 
+      //begin createSliderUI
       function sliderUI(dataLayer, colorize) {
-
+        //create a leaflet control object
+        var sliderControl = $(function() {
+          $("#slider-vertical").slider({
+            orientation: "vertical",
+            range: "min",
+            min: 1,
+            max: 9,
+            value: 1,
+            slide: function(event, ui) {
+              $("#amount").val(ui.value);
+            }
+          });
+          $("#amount").val($("#slider-vertical").slider("value"));
+        });
+        //once the object is added to the map
+        sliderControl.onAdd = function(map) {
+          var slider = L.DomUtil.get("#slider-vertical"); //selects the DOM element ui-controls
+          L.DomEvent.disableScrollPropagation(slider); //turn off scrolling while using the control object
+          L.DomEvent.disableClickPropagation(slider); //turn off clicking while using the control object
+          return slider; //returns the slider
+        }
+        sliderControl.addTo(map); //adds the slider control object to map
         $("#slider-vertical") //select our input element from the DOM element ui-controls
           .on("input change", function() { //when the input element is changed
-            var currentYear = $(this).val(); //the new input value is received
-            updateMap(dataLayer, colorize, currentYear); //assign it to currentYear and call updateMap
-            //$('.legend h3 span').html(currentYear); //update the year in the legend to the selected year
+            var currentPeriod = periodMap[$(this).val()]; //the new input value is received
+            updateMap(dataLayer, colorize, currentPeriod); //assign it to currentYear and call updateMap
+            //$('.legend h3 span').html(currentPeriod); //update the year in the legend to the selected year
           });
+      } // end createSliderUI()
 
-      }
     </script>
 
 
