@@ -99,11 +99,16 @@
         </footer>
       </div>
     </div>
-    <div id="map" class='col col--12 col--9-ml h180 viewport-twothirds viewport-full-ml'></div>
-    <div id="summary-info">
-      <div id="time-period">  </div>
-      <div id="period-summary"></div>
-      <div id="period-link"></div>
+    <div id="map" class='col col--12 col--9-ml h180 viewport-twothirds top viewport-twothirds-ml'>
+    <div id="summary-info" class='col col--12 col--9-ml h180 viewport-twothirds bottom viewport-third-ml'>
+      <div id="time-period">
+        <h2>People have lived in Kentucky for over 12,000 years.<br>Use the slider on the left to learn the past!</h2>
+      </div>
+      <div id="period-summary">
+      </div>
+      <div id="period-link">
+      </div>
+      </div>
     </div>
 
     <!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script> -->
@@ -140,12 +145,12 @@
       var summaryMap = {
         "5" : "Paleoindian",
         "4" : "Archaic",
-        "3" : "",
-        "2" : "",
-        "1" : ""
+        "3" : "Woodland",
+        "2" : "Latepre",
+        "1" : "Historic"
       };
 
-
+      //place synopses here, use same tags as coresponding divs above
       var summaryInfo = {
         "PaleoIndian": {
             "info": 'Arrived at the end of the last ice age, perhaps earlier Hunted megafauna such as mammoth, mastodon, and giant bison',
@@ -171,7 +176,7 @@
             };
           }
         }).addTo(map); //add it to the map
-        
+
         map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
 
         // drawLegend(breaks, colorize);
@@ -180,51 +185,51 @@
       }
 
       function getClassBreaks(dataLayer, currentPeriod) {
-        
+
           // empty array to hold our values
           var values = [];
-    
+
           // loop through the current period's arrays ("PALEO", "EPALEO", "LPALEO")
           periodMap[currentPeriod].forEach(function(period) {
-    
+
             // for each one
             // loop through each hexagon
             dataLayer.eachLayer(function(layer) {
-    
+
               var props = layer.feature.properties;
               // if it has a value greater than one
               if(props[period] > 0) {
-                // add it to our 
+                // add it to our
                 values.push(props[period])
               }
-    
+
             })
-    
+
           });
 
       // //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
       var breaks = chroma.limits(values, 'k', 7 );
 
       return breaks;
-
+      //have draw legend here???
     }
 
       //update function to update map
       function updateMap(dataLayer, currentPeriod) {
 
         var breaks = getClassBreaks(dataLayer, currentPeriod);
-        
+
         var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
-  
+
         dataLayer.eachLayer(function(layer) {//cycle through each layer
-  
+
           var props = layer.feature.properties,
               currentTotalValue = 0;
-          
+
           periodMap[currentPeriod].forEach(function(period) {
               currentTotalValue += props[period];
           });
-  
+
           layer.setStyle({//for each layer set style
             fillColor: colorize(currentTotalValue)
           });
@@ -232,6 +237,7 @@
           // var popupInfo = "<b>Paleoindian (+12,000 - 10,000BP)</b><br>" + "<ul><li>Arrived at the end of the last ice age, perhaps earlier</li>" + "<li>Hunted megafauna such as mammoth, mastodon, and giant bison</li>" + "<li>Lived in small groups and moved frequently</li>" + "<li>Made large, well-crafted spear points</li>" + "<li>Little known about ritual or ceremonial life</li></ul><br>" + "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a>."
           // layer.bindPopup(popupInfo);//bind popup to map
         });
+        //Or have drawLegend here?? this will update the legend everytime the map is updated - do I want to have the legend drawn once and then have another place where the content is updated??
       }
 
       //begin sliderUI
@@ -252,11 +258,11 @@
 
       } // end sliderUI()
 
-
+      //function to update div with synopses of each time period
     function updateSummaryInfo(val) {
-
+      //ajax requests to select the div id's and then tell it to replace content
         var timePeriod = $("#time-period"),
-            periodOverview = $('#<div id="time-period"></div>');
+            periodOverview = $("#time-period");//why the same? check and fix
 
         var periodName = summaryMap[val];
 
@@ -292,6 +298,8 @@
       //end the list
       legend.append("</ul>");
     } //end drawLegend
+
+    //still need to build a summary tooltip, set max zoom, disable pan till zoomed in
 
     </script>
 
