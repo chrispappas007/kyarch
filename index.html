@@ -103,7 +103,7 @@
       <div id="map" class='viewport-full viewport-twothirds-ml'></div>
       <div id="summary-info" class='px12 py12 color-white bg-gray viewport-full viewport-third-ml'>
         <div id="time-period">
-          <h1><b>People have lived in Kentucky for over 12,000 years. Use the slider on the left to learn the past!</h1>
+          <h1><b>People have lived in Kentucky for over 12,000 years. Use the slider on the left to learn about the past!</h1>
         </div>
         <div id="period-summary">
           <h2></h2>
@@ -155,9 +155,9 @@
         "1" : "Historic"
       };
 
-      //place synopses here, use same tags as coresponding divs above
+      //place synopses here
       var summaryInfo = {
-        "PaleoIndian": {
+        "Paleoindian": {
             "time": "<b>Paleoindian (+12,000 - 10,000BP)</b>",
             "summary": "<ul><li>Arrived at the end of the last ice age, likely earlier</li>" + "<li>Hunted megafauna such as mammoth, mastodon, and giant bison</li>" + "<li>Lived in small groups and moved frequently</li>" + "<li>Made large, well-crafted spear points</li>" + "<li>Little known about ritual or ceremonial life</li></ul>",
             "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a>"
@@ -175,10 +175,10 @@
         "Latepre": {
           "time": "<b>Late Prehistoric (1,000 – 300 BP)",
           "summary": "<ul><li>Two main groups – Mississippian in western Kentucky and Fort Ancient in eastern Kentucky</li>" + "<li>SVillage life revolved around corn and bean agriculture</li>" + "<li>Developed the hoe for farming</li>" + "<li>Lived in large year-round settlements, many with a stockade</li>" + "<li>Communities ruled by hereditary chiefs</li></ul>",
-          "link": "Learn more: Fort Ancient: <a href='http://heritage.ky.gov/kas/kyarchynew/Cox+Site.htm'>The Cox Site</a></br>Mississippian: <a href='http://heritage.ky.gov/kas/kyarchynew/Jonathan+Creek.htm'>Jonathan Creek</a>"
+          "link": "Learn more: Fort Ancient: <a href='http://heritage.ky.gov/kas/kyarchynew/Cox+Site.htm'>The Cox Site</a>; Mississippian: <a href='http://heritage.ky.gov/kas/kyarchynew/Jonathan+Creek.htm'>Jonathan Creek</a>"
         },
         "Historic": {
-          "time": "<b>Historic (300 BP to present</b>",
+          "time": "<b>Historic (300 BP to present)</b>",
           "summary": "<ul><li>Period begins with arrival of Europeans explorers and settlers in the 1700s</li>" + "<li>Conflict during earliest interactions between Europeans and Native peoples</li>" + "<li>By early 1800s, most land was claimed and roads were being established</li>" + "<li>By the Civil War, has a highly productive agricultural economy</li>" + "<li>BPost Civil War, extractive industries like coal mining expanded</li>" + "<li>Tobacco farming increased</li>" + "<li>Horse farms developed</li></ul>",
           "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Riverside.htm'>The Farnsley-Moreman Landing</a>"
         }
@@ -206,7 +206,7 @@
 
         map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
 
-        // drawLegend(breaks, colorize);
+        drawLegend();
         sliderUI(dataLayer);
         updateMap(dataLayer, '1');  // start with oldest time period first?
       }
@@ -234,11 +234,11 @@
 
           });
 
-      // //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
+      //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
       var breaks = chroma.limits(values, 'k', 7 );
 
       return breaks;
-      //have draw legend here???
+
     }
 
       //update function to update map
@@ -262,11 +262,12 @@
           });
 
         });
+        updateLegend(breaks, colorize);
         //Or have drawLegend here?? this will update the legend everytime the map is updated - do I want to have the legend drawn once and then have another place where the content is updated??
       }
 
       //begin sliderUI
-      function sliderUI(dataLayer, colorize) {
+      function sliderUI(dataLayer) {
         //variable to hold ajax request to select slider div and give it some attributes
           $("#slider-vertical").slider({
             orientation: "vertical",
@@ -300,7 +301,7 @@
     }
 
       //begin drawLegend
-    function drawLegend(breaks, colorize) {
+    function drawLegend() {
       //create leaflet control object
       var legendControl = L.control({
         position: 'topleft'
@@ -310,6 +311,24 @@
         return legend; //return that new element
       };
       legendControl.addTo(map); //add the legend control to the map
+      // //select the legend and add a heading and the ranges
+      // var legend = $('.legend').html("<h3>Site Density</h3><ul>");
+      // //loop through the break values created in processData
+      // for (var i = 0; i < breaks.length - 1; i++) {
+      //   //grab the color for each break
+      //   var color = colorize(breaks[i], breaks);
+      //   //make the color and its range an item
+      //   var classRange = '<li><span style="background:' + color + '"></span> ' +
+      //     breaks[i].toLocaleString() + ' &mdash; ' +
+      //     breaks[i + 1].toLocaleString() + '</li>'
+      //   //add each item to the list
+      //   $('.legend ul').append(classRange);
+      // }
+      // //end the list
+      // legend.append("</ul>");
+    } //end drawLegend
+
+    function updateLegend(breaks, colorize) {
       //select the legend and add a heading and the ranges
       var legend = $('.legend').html("<h3>Site Density</h3><ul>");
       //loop through the break values created in processData
@@ -325,7 +344,7 @@
       }
       //end the list
       legend.append("</ul>");
-    } //end drawLegend
+    }
 
     //still need to build a summary tooltip, set max zoom, disable pan till zoomed in
 
