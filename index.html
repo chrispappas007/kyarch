@@ -235,7 +235,7 @@
           });
 
       //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using the quantile method into 5 groups
-      var breaks = chroma.limits(values, 'k', 7 );
+      var breaks = chroma.limits(values, 'k', 5 );
 
       return breaks;
 
