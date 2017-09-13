@@ -126,23 +126,25 @@
     </div>
     <div class='col col--12 col--9-ml viewport-twothirds viewport-full-ml'>
       <div id="map" class='viewport-full viewport-twothirds-ml'></div>
-      <div id="summary-info" class='px12 py12 color-white bg-gray viewport-full viewport-third-ml'>
-        <div id="time-period">
-          <h1><b>People have lived in Kentucky for over 12,000 years. Use the slider on the left to learn about the past!</h1>
-      </div>
-      <div id="period-summary">
-        <h2></h2>
-      </div>
-      <div id="period-link">
-        <h2></h2>
-      </div>
-      <div id="image">
-        <p></p>
+      <div class='px12 py12 color-white bg-gray viewport-full viewport-third-ml scroll-auto'>
+        <div id="summary-info" class='col col--9-ml left'>
+          <div id="time-period">
+            <h1><b>People have lived in Kentucky for over 12,000 years. Use the slider on the left to learn about the past!</h1>
+          </div>
+          <div id="period-summary" class='txt-ul txt-normal'>
+            <h2></h2>
+          </div>
+          <div id="period-link">
+            <h2></h2>
+          </div>
+        </div>
+        <div id="image" class='col col--3-ml my12 mx12 right'>
+          <p></p>
+        </div>
       </div>
     </div>
   </div>
-  </div>
-  </div>
+
 
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
@@ -189,14 +191,14 @@
         "summary": "<ul><li>Arrived at the end of the last ice age, likely earlier</li>" + "<li>Hunted megafauna such as mammoth, mastodon, and giant bison</li>" + "<li>Lived in small groups and moved frequently</li>" +
           "<li>Made large, well-crafted spear points</li>" + "<li>Little known about ritual or ceremonial life</li></ul>",
         "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a>",
-        "image": "<img scr='images/clovis.jpg'/>"
+        "image": "<img src='images/clovis.jpg'/>"
       },
       "Archaic": {
         "time": "<b>Archaic (10,000 to 3,000 BP)</b>",
         "summary": "<ul><li>Extinction of megafauna shifted focus to smaller game – deer, turkey, rabbit</li>" + "<li>Collected wild plant for food and medicine and began to grow small gardens</li>" +
           "<li>Began to live in one place longer, but usually not more than a few months</li>" + "<li>Used a spearthrower (atlatl) for improved accuracy</li>" + "<li>Plant foods became a great part of their diet</li></ul>",
         "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Indian+Knoll+Take+Two.htm'>Indian Knoll</a>",
-        "image": "<img scr='images/indianknollaerial.jpg'/>"
+        "image": "<img src='images/indianknollaerial.jpg'/>"
       },
       "Woodland": {
         "time": "<b>Woodland (3,000 to 1,000 BP)</b>",
@@ -204,14 +206,14 @@
           "<li>Built bigger houses and lived in bigger communities</li>" + "<li>Built large earthen enclosures and mounds as a part of religious and ceremonial life</li>" + "<li>Participated in long-distance trade</li>" +
           "<li>Invention of the Bow and Arrow</li></ul>",
         "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Robbins.htm'>Robbins Mound Complex</a>",
-        "image": "<img scr='images/robbins.jpg'/>"
+        "image": "<img src='images/robbins.jpg'/>"
       },
       "Late Prehistoric": {
         "time": "<b>Late Prehistoric (1,000 – 300 BP)",
         "summary": "<ul><li>Two main groups – Mississippian in western Kentucky and Fort Ancient in eastern Kentucky</li>" + "<li>Village life revolved around corn and bean agriculture</li>" + "<li>Developed the hoe for farming</li>" +
           "<li>Lived in large year-round settlements, many with a stockade</li>" + "<li>Communities ruled by hereditary chiefs</li></ul>",
         "link": "Learn more: Fort Ancient: <a href='http://heritage.ky.gov/kas/kyarchynew/Cox+Site.htm'>The Cox Site</a>; Mississippian: <a href='http://heritage.ky.gov/kas/kyarchynew/Jonathan+Creek.htm'>Jonathan Creek</a>",
-        "image": "<img scr='images/jonathan.jpg'/>"
+        "image": "<img src='images/jonathan.jpg'/>"
       },
       "Historic": {
         "time": "<b>Historic (300 BP to present)</b>",
@@ -219,7 +221,7 @@
           "<li>By early 1800s, most land was claimed and roads were being established</li>" + "<li>By the Civil War, has a highly productive agricultural economy</li>" + "<li>BPost Civil War, extractive industries like coal mining expanded</li>" +
           "<li>Tobacco farming increased</li>" + "<li>Horse farms developed</li></ul>",
         "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Riverside.htm'>The Farnsley-Moreman Landing</a>",
-        "image": "<img scr='images/riverside.jpg'/>"
+        "image": "<img src='images/riverside.jpg'/>"
       }
     };
 
