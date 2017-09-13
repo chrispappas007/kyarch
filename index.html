@@ -134,6 +134,7 @@
       var map = L.mapbox.map('map', 'mapbox.light', {
         zoomSnap: .1,
         center: [-84.64, 37.83],
+        minZoom:7,
         zoom: 7,
         zoomControl: false,
 
@@ -206,6 +207,19 @@
 
         map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
 
+        //affordance for hovering over a hexagon
+        dataLayer.eachLayer(function(layer) {
+          layer.on('mouseover', function() {
+            layer.setStyle({
+              color: 'yellow'
+            })
+          }).on('mouseout', function() {
+            layer.setStyle({
+              color: '#dddddd'
+            })
+          })
+        });
+
         drawLegend();
         sliderUI(dataLayer);
         updateMap(dataLayer, '1');  // start with oldest time period first?
@@ -263,7 +277,6 @@
 
         });
         updateLegend(breaks, colorize);
-        //Or have drawLegend here?? this will update the legend everytime the map is updated - do I want to have the legend drawn once and then have another place where the content is updated??
       }
 
       //begin sliderUI
@@ -280,7 +293,6 @@
               updateSummaryInfo(ui.value);
             }
           });
-        //once the object is added to the map
 
       } // end sliderUI()
 
@@ -311,21 +323,7 @@
         return legend; //return that new element
       };
       legendControl.addTo(map); //add the legend control to the map
-      // //select the legend and add a heading and the ranges
-      // var legend = $('.legend').html("<h3>Site Density</h3><ul>");
-      // //loop through the break values created in processData
-      // for (var i = 0; i < breaks.length - 1; i++) {
-      //   //grab the color for each break
-      //   var color = colorize(breaks[i], breaks);
-      //   //make the color and its range an item
-      //   var classRange = '<li><span style="background:' + color + '"></span> ' +
-      //     breaks[i].toLocaleString() + ' &mdash; ' +
-      //     breaks[i + 1].toLocaleString() + '</li>'
-      //   //add each item to the list
-      //   $('.legend ul').append(classRange);
-      // }
-      // //end the list
-      // legend.append("</ul>");
+
     } //end drawLegend
 
     function updateLegend(breaks, colorize) {
