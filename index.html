@@ -268,21 +268,17 @@
       // empty array to hold our values
       var values = [];
 
-      // loop through the current period's arrays ("PALEO", "EPALEO", "LPALEO")
-      periodMap[currentPeriod].forEach(function(period) {
 
-        // for each one
-        // loop through each hexagon
-        dataLayer.eachLayer(function(layer) {
+      dataLayer.eachLayer(function(layer) { //cycle through each layer
+        //for the selected period
+        var props = layer.feature.properties,
+          currentTotalValue = 0;
+        //get the number of those sites from that hexagon
+        periodMap[currentPeriod].forEach(function(period) {
+          currentTotalValue += props[period];
+        });
 
-          var props = layer.feature.properties;
-          // if it has a value greater than one
-          if (props[period] > 0) {
-            // add it to our
-            values.push(props[period])
-          }
-
-        })
+        values.push(currentTotalValue);
 
       });
 
@@ -297,6 +293,7 @@
     function updateMap(dataLayer, currentPeriod) {
 
       var breaks = getClassBreaks(dataLayer, currentPeriod);
+      console.log(breaks);
 
       var colorize = chroma.scale(chroma.brewer.YlGnBu).classes(breaks).mode('lab');
 
