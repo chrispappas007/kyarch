@@ -16,9 +16,11 @@
       margin: 0;
       padding: 0;
     }
+
     h1 {
       font-family: Merriweather, sans-serif;
     }
+
     .legend {
       padding: 6px 8px;
       font-size: 1em;
@@ -53,7 +55,6 @@
       float: left;
       margin-right: 10px;
     }
-
   </style>
 
 </head>
@@ -103,219 +104,226 @@
       <div id="summary-info" class='px12 py12 color-white bg-gray viewport-full viewport-third-ml'>
         <div id="time-period">
           <h1><b>People have lived in Kentucky for over 12,000 years. Use the slider on the left to learn about the past!</h1>
-        </div>
-        <div id="period-summary">
-          <h2></h2>
-        </div>
-        <div id="period-link">
-          <h2></h2>
-        </div>
+      </div>
+      <div id="period-summary">
+        <h2></h2>
+      </div>
+      <div id="period-link">
+        <h2></h2>
       </div>
     </div>
-    </div>
+  </div>
+  </div>
   </div>
 
-    <!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script> -->
-    <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
-    <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script> -->
-    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- <script src="https://unpkg.com/simple-statistics@2.2.0/dist/simple-statistics.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
+  <!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script> -->
+  <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+  <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script> -->
+  <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <script src="https://unpkg.com/simple-statistics@2.2.0/dist/simple-statistics.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
 
-    <script>
-      // mapbox access token for pappas account
-      L.mapbox.accessToken = 'pk.eyJ1IjoiY2hyaXNwYXBwYXMwMDciLCJhIjoiY2o2OG5nZ3BlMGlpdzJwbnk1cTM0NG96aSJ9.Or0X37Xo2B4fv9TTMTd2cw';
+  <script>
+    // mapbox access token for pappas account
+    L.mapbox.accessToken = 'pk.eyJ1IjoiY2hyaXNwYXBwYXMwMDciLCJhIjoiY2o2OG5nZ3BlMGlpdzJwbnk1cTM0NG96aSJ9.Or0X37Xo2B4fv9TTMTd2cw';
 
-      // create the Leaflet map using mapbox.light tiles
-      var map = L.mapbox.map('map', 'mapbox.light', {
-        zoomSnap: .1,
-        center: [-84.64, 37.83],
-        minZoom:7,
-        zoom: 7,
-        zoomControl: false,
+    // create the Leaflet map using mapbox.light tiles
+    var map = L.mapbox.map('map', 'mapbox.light', {
+      zoomSnap: .1,
+      center: [-84.64, 37.83],
+      minZoom: 7,
+      zoom: 7,
+      zoomControl: false,
 
-      });
-      //variable to associate periods with stops on the slider
-      var periodMap = {
-        "5" : ["PALEO", "EPALEO", "LPALEO"],
-        "4" : ["ARCHAIC", "EARCH", "MARCH", "LARCH"],
-        "3" : ["WOODLAND", "EWOOD", "MWOOD", "LWOOD"],
-        "2" : ["LWMISS", "LATEPRE1", "LATEPRE2", "LATEPRE3"],
-        "1" : ["HISTORIC"]
-      };
-      //variable to associate periods with period names
-      var summaryMap = {
-        "5" : "Paleoindian",
-        "4" : "Archaic",
-        "3" : "Woodland",
-        "2" : "Late Prehistoric",
-        "1" : "Historic"
-      };
+    });
+    //variable to associate periods with stops on the slider
+    var periodMap = {
+      "5": ["PALEO", "EPALEO", "LPALEO"],
+      "4": ["ARCHAIC", "EARCH", "MARCH", "LARCH"],
+      "3": ["WOODLAND", "EWOOD", "MWOOD", "LWOOD"],
+      "2": ["LWMISS", "LATEPRE1", "LATEPRE2", "LATEPRE3"],
+      "1": ["HISTORIC"]
+    };
+    //variable to associate periods with period names
+    var summaryMap = {
+      "5": "Paleoindian",
+      "4": "Archaic",
+      "3": "Woodland",
+      "2": "Late Prehistoric",
+      "1": "Historic"
+    };
 
-      //period synopses
-      var summaryInfo = {
-        "Paleoindian": {
-            "time": "<b>Paleoindian (+12,000 - 10,000BP)</b>",
-            "summary": "<ul><li>Arrived at the end of the last ice age, likely earlier</li>" + "<li>Hunted megafauna such as mammoth, mastodon, and giant bison</li>" + "<li>Lived in small groups and moved frequently</li>" + "<li>Made large, well-crafted spear points</li>" + "<li>Little known about ritual or ceremonial life</li></ul>",
-            "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a>"
-        },
-        "Archaic": {
-          "time": "<b>Archaic (10,000 to 3,000 BP)</b>",
-          "summary": "<ul><li>Extinction of megafauna shifted focus to smaller game – deer, turkey, rabbit</li>" + "<li>Collected wild plant for food and medicine and began to grow small gardens</li>" + "<li>Began to live in one place longer, but usually not more than a few months</li>" + "<li>Used a spearthrower (atlatl) for improved accuracy</li>" + "<li>Plant foods became a great part of their diet</li></ul>",
-          "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Indian+Knoll+Take+Two.htm'>Indian Knoll</a>"
-        },
-        "Woodland": {
-          "time": "<b>Woodland (3,000 to 1,000 BP)</b>",
-          "summary": "<ul><li>Began to make pottery</li>" + "<li>Spent more time gardening and cultivated plants became important part of diet</li>" + "<li>Grew plants such as squash, sunflower, goosefoot, and maygrass</li>" + "<li>Built bigger houses and lived in bigger communities</li>" + "<li>Built large earthen enclosures and mounds as a part of religious and ceremonial life</li>" + "<li>Participated in long-distance trade</li>" + "<li>Invention of the Bow and Arrow</li></ul>",
-          "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Robbins.htm'>Robbins Mound Complex</a>"
-        },
-        "Late Prehistoric": {
-          "time": "<b>Late Prehistoric (1,000 – 300 BP)",
-          "summary": "<ul><li>Two main groups – Mississippian in western Kentucky and Fort Ancient in eastern Kentucky</li>" + "<li>Village life revolved around corn and bean agriculture</li>" + "<li>Developed the hoe for farming</li>" + "<li>Lived in large year-round settlements, many with a stockade</li>" + "<li>Communities ruled by hereditary chiefs</li></ul>",
-          "link": "Learn more: Fort Ancient: <a href='http://heritage.ky.gov/kas/kyarchynew/Cox+Site.htm'>The Cox Site</a>; Mississippian: <a href='http://heritage.ky.gov/kas/kyarchynew/Jonathan+Creek.htm'>Jonathan Creek</a>"
-        },
-        "Historic": {
-          "time": "<b>Historic (300 BP to present)</b>",
-          "summary": "<ul><li>Period begins with arrival of Europeans explorers and settlers in the 1700s</li>" + "<li>Conflict during earliest interactions between Europeans and Native peoples</li>" + "<li>By early 1800s, most land was claimed and roads were being established</li>" + "<li>By the Civil War, has a highly productive agricultural economy</li>" + "<li>BPost Civil War, extractive industries like coal mining expanded</li>" + "<li>Tobacco farming increased</li>" + "<li>Horse farms developed</li></ul>",
-          "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Riverside.htm'>The Farnsley-Moreman Landing</a>"
-        }
-      };
-
-        //AJAX request to load data
-      $.getJSON("data/hexgridonedeg.json", function(cult) {
-        drawMap(cult);//call draw map
-      });
-
-      //begin drawMap function
-      function drawMap(cult) {
-        // create Leaflet data layer and add to map
-        var dataLayer = L.geoJson(cult, {
-          style: function(feature) {
-            // style hexagons with initial default path options
-            return {
-              color: '#dddddd',
-              weight: 2,
-              fillOpacity: .5,
-              fillColor: '#1f78b4'
-            };
-          }
-        }).addTo(map); //add it to the map
-
-        map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
-
-        //affordance for hovering over a hexagon
-        dataLayer.eachLayer(function(layer) {
-          layer.on('mouseover', function() {
-            layer.setStyle({
-              color: '#fef65b'
-            }).bringToFront();
-          }).on('mouseout', function() {
-            layer.setStyle({
-              color: '#dddddd'
-            })
-          })
-        });
-
-        drawLegend();
-        sliderUI(dataLayer);
-        updateMap(dataLayer, '5');
+    //period synopses
+    var summaryInfo = {
+      "Paleoindian": {
+        "time": "<b>Paleoindian (+12,000 - 10,000BP)</b>",
+        "summary": "<ul><li>Arrived at the end of the last ice age, likely earlier</li>" + "<li>Hunted megafauna such as mammoth, mastodon, and giant bison</li>" + "<li>Lived in small groups and moved frequently</li>" +
+          "<li>Made large, well-crafted spear points</li>" + "<li>Little known about ritual or ceremonial life</li></ul>",
+        "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a>"
+      },
+      "Archaic": {
+        "time": "<b>Archaic (10,000 to 3,000 BP)</b>",
+        "summary": "<ul><li>Extinction of megafauna shifted focus to smaller game – deer, turkey, rabbit</li>" + "<li>Collected wild plant for food and medicine and began to grow small gardens</li>" +
+          "<li>Began to live in one place longer, but usually not more than a few months</li>" + "<li>Used a spearthrower (atlatl) for improved accuracy</li>" + "<li>Plant foods became a great part of their diet</li></ul>",
+        "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Indian+Knoll+Take+Two.htm'>Indian Knoll</a>"
+      },
+      "Woodland": {
+        "time": "<b>Woodland (3,000 to 1,000 BP)</b>",
+        "summary": "<ul><li>Began to make pottery</li>" + "<li>Spent more time gardening and cultivated plants became important part of diet</li>" + "<li>Grew plants such as squash, sunflower, goosefoot, and maygrass</li>" +
+          "<li>Built bigger houses and lived in bigger communities</li>" + "<li>Built large earthen enclosures and mounds as a part of religious and ceremonial life</li>" + "<li>Participated in long-distance trade</li>" +
+          "<li>Invention of the Bow and Arrow</li></ul>",
+        "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Robbins.htm'>Robbins Mound Complex</a>"
+      },
+      "Late Prehistoric": {
+        "time": "<b>Late Prehistoric (1,000 – 300 BP)",
+        "summary": "<ul><li>Two main groups – Mississippian in western Kentucky and Fort Ancient in eastern Kentucky</li>" + "<li>Village life revolved around corn and bean agriculture</li>" + "<li>Developed the hoe for farming</li>" +
+          "<li>Lived in large year-round settlements, many with a stockade</li>" + "<li>Communities ruled by hereditary chiefs</li></ul>",
+        "link": "Learn more: Fort Ancient: <a href='http://heritage.ky.gov/kas/kyarchynew/Cox+Site.htm'>The Cox Site</a>; Mississippian: <a href='http://heritage.ky.gov/kas/kyarchynew/Jonathan+Creek.htm'>Jonathan Creek</a>"
+      },
+      "Historic": {
+        "time": "<b>Historic (300 BP to present)</b>",
+        "summary": "<ul><li>Period begins with arrival of Europeans explorers and settlers in the 1700s</li>" + "<li>Conflict during earliest interactions between Europeans and Native peoples</li>" +
+          "<li>By early 1800s, most land was claimed and roads were being established</li>" + "<li>By the Civil War, has a highly productive agricultural economy</li>" + "<li>BPost Civil War, extractive industries like coal mining expanded</li>" +
+          "<li>Tobacco farming increased</li>" + "<li>Horse farms developed</li></ul>",
+        "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Riverside.htm'>The Farnsley-Moreman Landing</a>"
       }
+    };
 
-      //create class breaks for data
-      function getClassBreaks(dataLayer, currentPeriod) {
+    //AJAX request to load data
+    $.getJSON("data/hexgridonedeg.json", function(cult) {
+      drawMap(cult); //call draw map
+    });
 
-          // empty array to hold our values
-          var values = [];
+    //begin drawMap function
+    function drawMap(cult) {
+      // create Leaflet data layer and add to map
+      var dataLayer = L.geoJson(cult, {
+        style: function(feature) {
+          // style hexagons with initial default path options
+          return {
+            color: '#dddddd',
+            weight: 2,
+            fillOpacity: .5,
+            fillColor: '#1f78b4'
+          };
+        }
+      }).addTo(map); //add it to the map
 
-          // loop through the current period's arrays ("PALEO", "EPALEO", "LPALEO")
-          periodMap[currentPeriod].forEach(function(period) {
+      map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
 
-            // for each one
-            // loop through each hexagon
-            dataLayer.eachLayer(function(layer) {
+      //affordance for hovering over a hexagon
+      dataLayer.eachLayer(function(layer) {
+        layer.on('mouseover', function() {
+          layer.setStyle({
+            color: '#fef65b'
+          }).bringToFront();
+        }).on('mouseout', function() {
+          layer.setStyle({
+            color: '#dddddd'
+          })
+        })
+      });
 
-              var props = layer.feature.properties;
-              // if it has a value greater than one
-              if(props[period] > 0) {
-                // add it to our
-                values.push(props[period])
-              }
+      drawLegend();
+      sliderUI(dataLayer);
+      updateMap(dataLayer, '5');
+    }
 
-            })
+    //create class breaks for data
+    function getClassBreaks(dataLayer, currentPeriod) {
 
-          });
+      // empty array to hold our values
+      var values = [];
+
+      // loop through the current period's arrays ("PALEO", "EPALEO", "LPALEO")
+      periodMap[currentPeriod].forEach(function(period) {
+
+        // for each one
+        // loop through each hexagon
+        dataLayer.eachLayer(function(layer) {
+
+          var props = layer.feature.properties;
+          // if it has a value greater than one
+          if (props[period] > 0) {
+            // add it to our
+            values.push(props[period])
+          }
+
+        })
+
+      });
 
       //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using k means into 5 groups
-      var breaks = chroma.limits(values, 'k', 5 );
+      var breaks = chroma.limits(values, 'k', 5);
 
       return breaks;
 
-    }//end getClassBreaks
+    } //end getClassBreaks
 
-      //update function to update map
-      function updateMap(dataLayer, currentPeriod) {
+    //update function to update map
+    function updateMap(dataLayer, currentPeriod) {
 
-        var breaks = getClassBreaks(dataLayer, currentPeriod);
+      var breaks = getClassBreaks(dataLayer, currentPeriod);
 
-        var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
+      var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
 
-        dataLayer.eachLayer(function(layer) {//cycle through each layer
-          //for the selected period
-          var props = layer.feature.properties,
-              currentTotalValue = 0;
-              //get the number of those sites from that hexagon
-          periodMap[currentPeriod].forEach(function(period) {
-              currentTotalValue += props[period];
-          });
-          //color the hexagon based on that number
-          layer.setStyle({//for each layer set style
-            fillColor: colorize(currentTotalValue)
-          });
-          //tooltip for hexagon dataLayer
-          var tooltip = "<b>" + summaryMap[currentPeriod] + " Sites:</b> " + currentTotalValue + "<br>"
-          layer.bindTooltip(tooltip, {
-            sticky: true
-          });
+      dataLayer.eachLayer(function(layer) { //cycle through each layer
+        //for the selected period
+        var props = layer.feature.properties,
+          currentTotalValue = 0;
+        //get the number of those sites from that hexagon
+        periodMap[currentPeriod].forEach(function(period) {
+          currentTotalValue += props[period];
         });
-        updateLegend(breaks, colorize);
-      }//end updateMap
+        //color the hexagon based on that number
+        layer.setStyle({ //for each layer set style
+          fillColor: colorize(currentTotalValue)
+        });
+        //tooltip for hexagon dataLayer
+        var tooltip = "<b>" + summaryMap[currentPeriod] + " Sites:</b> " + currentTotalValue + "<br>"
+        layer.bindTooltip(tooltip, {
+          sticky: true
+        });
+      });
+      updateLegend(breaks, colorize);
+    } //end updateMap
 
-      //begin sliderUI
-      function sliderUI(dataLayer) {
-        //variable to hold ajax request to select slider div and give it some attributes
-          $("#slider-vertical").slider({
-            orientation: "vertical",
-            range: "min",
-            min: 1,
-            max: 5,
-            value: 5,
-            slide: function(event, ui) {
-              updateMap(dataLayer, ui.value);//send selected period to updateMap
-              updateSummaryInfo(ui.value);//send selected period to updateSummaryInfo
-            }
-          });
+    //begin sliderUI
+    function sliderUI(dataLayer) {
+      //variable to hold ajax request to select slider div and give it some attributes
+      $("#slider-vertical").slider({
+        orientation: "vertical",
+        range: "min",
+        min: 1,
+        max: 5,
+        value: 5,
+        slide: function(event, ui) {
+          updateMap(dataLayer, ui.value); //send selected period to updateMap
+          updateSummaryInfo(ui.value); //send selected period to updateSummaryInfo
+        }
+      });
 
-      } // end sliderUI()
+    } // end sliderUI()
 
-      //function to update div with synopses of each time period
+    //function to update div with synopses of each time period
     function updateSummaryInfo(val) {
       //ajax requests to select the div id's and then tell it to replace content
-        var timePeriod = $("#time-period"),
-            periodOverview = $("#period-summary"),
-            periodLink = $("#period-link")
+      var timePeriod = $("#time-period"),
+        periodOverview = $("#period-summary"),
+        periodLink = $("#period-link")
 
-        var periodName = summaryMap[val];
-        //update the divs with the selected period's summary info
-        timePeriod.html(summaryInfo[periodName].time);
-        periodOverview.html(summaryInfo[periodName].summary);
-        periodLink.html(summaryInfo[periodName].link);
+      var periodName = summaryMap[val];
+      //update the divs with the selected period's summary info
+      timePeriod.html(summaryInfo[periodName].time);
+      periodOverview.html(summaryInfo[periodName].summary);
+      periodLink.html(summaryInfo[periodName].link);
 
-    }//end updateSummaryInfo
+    } //end updateSummaryInfo
 
-      //begin drawLegend
+    //begin drawLegend
     function drawLegend() {
       //create leaflet control object
       var legendControl = L.control({
@@ -346,9 +354,8 @@
       }
       //end the list
       legend.append("</ul>");
-    }//end updateLegend
-
-    </script>
+    } //end updateLegend
+  </script>
 
 </body>
 
