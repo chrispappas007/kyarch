@@ -7,9 +7,8 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
   <link href="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Domine' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link href="https://fonts.googleapis.com/css?family=Domine|Merriweather" rel="stylesheet">
 
   <style>
     body {
@@ -97,23 +96,23 @@
       <div class='h-full prose prose--dark bg-gray color-gray-dark relative scroll-auto'>
         <div id="slider-vertical" class='absolute right mr12 mt36' style="height:530px;">
         </div>
-        <div class='paleo'>
+        <div class='paleo color-darken50'>
           <p class='txt-h3 txt-bold pt24 px30 ml24'>Paleoindian</p>
           <p class='txt-h5 pb24 px30 ml24'>+12,000 - 10,000 BP</p>
         </div>
-        <div class='archaic'>
+        <div class='archaic color-darken50'>
           <p class='txt-h3 txt-bold pt24 px30 ml24'>Archaic</p>
           <p class='txt-h5 pb24 px30 ml24'>10,000 - 3,000 BP</p>
         </div>
-        <div class='wood'>
+        <div class='wood color-lighten75'>
           <p class='txt-h3 txt-bold pt24 px30 ml24'>Woodland</p>
           <p class='txt-h5 pb24 px30 ml24'>3,000 - 1,000 BP</p>
         </div>
-        <div class='latepre'>
+        <div class='latepre color-gray-light'>
           <p class='txt-h3 txt-bold pt24 px30 ml24'>Late Prehistoric</p>
           <p class='txt-h5 pb24 px30 ml24'>1,000 - 300 BP</p>
         </div>
-        <div class='historic'>
+        <div class='historic color-gray-light'>
           <p class='txt-h3 txt-bold pt24 px30 ml24'>Historic</p>
           <p class='txt-h5 pb24 px30 ml24'>300 BP - Present</p>
         </div>
@@ -148,8 +147,10 @@
 
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
-  <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script> -->
-  <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
   <!-- <script src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script> -->
@@ -273,21 +274,17 @@
       // empty array to hold our values
       var values = [];
 
-      // loop through the current period's arrays ("PALEO", "EPALEO", "LPALEO")
-      periodMap[currentPeriod].forEach(function(period) {
 
-        // for each one
-        // loop through each hexagon
-        dataLayer.eachLayer(function(layer) {
+      dataLayer.eachLayer(function(layer) { //cycle through each layer
+        //for the selected period
+        var props = layer.feature.properties,
+          currentTotalValue = 0;
+        //get the number of those sites from that hexagon
+        periodMap[currentPeriod].forEach(function(period) {
+          currentTotalValue += props[period];
+        });
 
-          var props = layer.feature.properties;
-          // if it has a value greater than one
-          if (props[period] > 0) {
-            // add it to our
-            values.push(props[period])
-          }
-
-        })
+        values.push(currentTotalValue);
 
       });
 
@@ -302,6 +299,7 @@
     function updateMap(dataLayer, currentPeriod) {
 
       var breaks = getClassBreaks(dataLayer, currentPeriod);
+      console.log(breaks);
 
       var colorize = chroma.scale(chroma.brewer.YlGnBu).classes(breaks).mode('lab');
 
