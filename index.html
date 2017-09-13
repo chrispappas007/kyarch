@@ -7,9 +7,9 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
   <link href="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.min.css" rel="stylesheet">
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Domine' rel='stylesheet' type='text/css'>
 
   <style>
     body {
@@ -19,6 +19,31 @@
 
     h1 {
       font-family: Merriweather, sans-serif;
+    }
+
+    .paleo {
+      background: #ffffcc;
+      font-family: Domine, sans-serif;
+    }
+
+    .archaic {
+      background: #a1dab4;
+      font-family: Domine, sans-serif;
+    }
+
+    .wood {
+      background: #41b6c4;
+      font-family: Domine, sans-serif;
+    }
+
+    .latepre {
+      background: #2c7fb8;
+      font-family: Domine, sans-serif;
+    }
+
+    .historic {
+      background: #253494;
+      font-family: Domine, sans-serif;
     }
 
     .legend {
@@ -72,25 +97,25 @@
       <div class='h-full prose prose--dark bg-gray color-gray-dark relative scroll-auto'>
         <div id="slider-vertical" class='absolute right mr12 mt36' style="height:530px;">
         </div>
-        <div class='bg-yellow-faint'>
-          <p class='txt-h3 pt24 px30 ml30'>Paleoindian</p>
-          <p class='txt-h5 pb24 px30 ml30'>+12,000 - 10,000 BP</p>
+        <div class='paleo'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Paleoindian</p>
+          <p class='txt-h5 pb24 px30 ml24'>+12,000 - 10,000 BP</p>
         </div>
-        <div class='bg-green-light'>
-          <p class='txt-h3 pt24 px30 ml30'>Archaic</p>
-          <p class='txt-h5 pb24 px30 ml30'>10,000 - 3,000 BP</p>
+        <div class='archaic'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Archaic</p>
+          <p class='txt-h5 pb24 px30 ml24'>10,000 - 3,000 BP</p>
         </div>
-        <div class='bg-blue-light'>
-          <p class='txt-h3 pt24 px30 ml30'>Woodland</p>
-          <p class='txt-h5 pb24 px30 ml30'>3,000 - 1,000 BP</p>
+        <div class='wood'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Woodland</p>
+          <p class='txt-h5 pb24 px30 ml24'>3,000 - 1,000 BP</p>
         </div>
-        <div class='bg-blue'>
-          <p class='txt-h3 pt24 px30 ml30'>Late Prehistoric</p>
-          <p class='txt-h5 pb24 px30 ml30'>1,000 - 300 BP</p>
+        <div class='latepre'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Late Prehistoric</p>
+          <p class='txt-h5 pb24 px30 ml24'>1,000 - 300 BP</p>
         </div>
-        <div class='bg-blue-dark'>
-          <p class='txt-h3 pt24 px30 ml30'>Historic</p>
-          <p class='txt-h5 pb24 px30 ml30'>300 BP - Present</p>
+        <div class='historic'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Historic</p>
+          <p class='txt-h5 pb24 px30 ml24'>300 BP - Present</p>
         </div>
         <footer class='mt12 txt-s static bottom'>
           <ul>
@@ -116,29 +141,27 @@
   </div>
   </div>
 
-  <!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script> -->
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
-  <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
   <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script> -->
   <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <!-- <script src="https://unpkg.com/simple-statistics@2.2.0/dist/simple-statistics.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
+  <script src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script>
 
   <script>
-    // mapbox access token for pappas account
-    L.mapbox.accessToken = 'pk.eyJ1IjoiY2hyaXNwYXBwYXMwMDciLCJhIjoiY2o2OG5nZ3BlMGlpdzJwbnk1cTM0NG96aSJ9.Or0X37Xo2B4fv9TTMTd2cw';
-
+    //map tiles
+    var tile = new L.StamenTileLayer("terrain");
     // create the Leaflet map using mapbox.light tiles
-    var map = L.mapbox.map('map', 'mapbox.light', {
+    var map = new L.map('map', {
       zoomSnap: .1,
       center: [-84.64, 37.83],
       minZoom: 7,
       zoom: 7,
       zoomControl: false,
-
     });
+    map.addLayer(tile);
+
     //variable to associate periods with stops on the slider
     var periodMap = {
       "5": ["PALEO", "EPALEO", "LPALEO"],
@@ -268,7 +291,7 @@
 
       var breaks = getClassBreaks(dataLayer, currentPeriod);
 
-      var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
+      var colorize = chroma.scale(chroma.brewer.YlGnBu).classes(breaks).mode('lab');
 
       dataLayer.eachLayer(function(layer) { //cycle through each layer
         //for the selected period
