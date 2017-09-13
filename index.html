@@ -152,11 +152,13 @@
   <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
-  <script src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script>
+  <!-- <script src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script> -->
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
 
   <script>
     //map tiles
-    var tile = new L.StamenTileLayer("terrain");
+    // var tile = new L.StamenTileLayer("toner");
+    var tile = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png');
     // create the Leaflet map stamen tiles
     var map = new L.map('map', {
       zoomSnap: .1,
