@@ -144,7 +144,6 @@
   </div>
   </div>
 
-
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -157,7 +156,7 @@
     //map tiles
     // var tile = new L.StamenTileLayer("toner");
     var tile = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png');
-    // create the Leaflet map stamen tiles
+    // create the Leaflet map with tiles
     var map = new L.map('map', {
       zoomSnap: .1,
       center: [-84.64, 37.83],
@@ -183,7 +182,6 @@
       "2": "Late Prehistoric",
       "1": "Historic"
     };
-
     //period synopses
     var summaryInfo = {
       "Paleoindian": {
@@ -263,14 +261,13 @@
       drawLegend();
       sliderUI(dataLayer);
       updateMap(dataLayer, '5');
-    }
+    }//end drawMap
 
     //create class breaks for data
     function getClassBreaks(dataLayer, currentPeriod) {
 
       // empty array to hold our values
       var values = [];
-
 
       dataLayer.eachLayer(function(layer) { //cycle through each layer
         //for the selected period
@@ -313,7 +310,7 @@
           fillColor: colorize(currentTotalValue)
         });
         //tooltip for hexagon dataLayer
-        var tooltip = "<b>" + summaryMap[currentPeriod] + " Sites:</b> " + currentTotalValue + "<br>"
+        var tooltip = "<b>" + summaryMap[currentPeriod] + " Sites:</b> " + currentTotalValue
         layer.bindTooltip(tooltip, {
           sticky: true
         });
