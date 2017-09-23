@@ -275,15 +275,15 @@
           currentTotalValue = 0;
         //get the number of those sites from that hexagon
         periodMap[currentPeriod].forEach(function(period) {
-          currentTotalValue += props[period];
+            currentTotalValue += props[period];
         });
 
-        values.push(currentTotalValue);
+      if (currentTotalValue > 0) values.push(currentTotalValue);
 
       });
 
-      //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using k means into 5 groups
-      var breaks = chroma.limits(values, 'k', 5);
+      //create the actual classification breaks using the array created above and chroma-js, tell it we want data grouped using k means into 4 groups
+      var breaks = chroma.limits(values, 'k', 4);
 
       return breaks;
 
@@ -304,6 +304,7 @@
         //get the number of those sites from that hexagon
         periodMap[currentPeriod].forEach(function(period) {
           currentTotalValue += props[period];
+
         });
         //color the hexagon based on that number
         layer.setStyle({ //for each layer set style
