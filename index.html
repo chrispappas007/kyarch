@@ -223,14 +223,16 @@
       }
     };
 
+    $.getJSON("data/kycounties.json", function(count) {
+      drawCounty(count);
+    });
+
     //AJAX request to load data
     $.getJSON("data/hexgridonedeg.json", function(cult) {
       drawMap(cult);//call draw map
     });
 
-    $.getJSON("data/kycounties.json", function(count) {
-      drawCounty(count);
-    });
+
 
     //begin drawMap function
     function drawMap(cult) {
