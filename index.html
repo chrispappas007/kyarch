@@ -225,7 +225,11 @@
 
     //AJAX request to load data
     $.getJSON("data/hexgridonedeg.json", function(cult) {
-      drawMap(cult); //call draw map
+      drawMap(cult);//call draw map
+    });
+
+    $.getJSON("data/kycounties.json", function(count) {
+      drawCounty(count);
     });
 
     //begin drawMap function
@@ -262,6 +266,20 @@
       sliderUI(dataLayer);
       updateMap(dataLayer, '5');
     }//end drawMap
+
+    function drawCounty(count) {
+      var county = L.geoJson(count, {
+        style: function(feature) {
+          return {
+            color: '#c0c0c0',
+            weight: 1,
+            fillOpacity: 0
+            //fillColor: '#1f78b4'
+
+          };
+        }
+      }).addTo(map);
+    };
 
     //create class breaks for data
     function getClassBreaks(dataLayer, currentPeriod) {
