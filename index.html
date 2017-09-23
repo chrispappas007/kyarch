@@ -376,7 +376,7 @@
     function drawLegend() {
       //create leaflet control object
       var legendControl = L.control({
-        position: 'topleft'
+        position: 'topright'
       });
       legendControl.onAdd = function(map) { //once the object is added to the map
         var legend = L.DomUtil.create('div', 'legend'); //create a new division element on the map
