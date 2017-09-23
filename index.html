@@ -295,7 +295,7 @@
       var breaks = getClassBreaks(dataLayer, currentPeriod);
       console.log(breaks);
 
-      var colorize = chroma.scale(chroma.brewer.YlGnBu).classes(breaks).mode('lab');
+      var colorize = chroma.scale(chroma.brewer.Reds).classes(breaks).mode('lab');
 
       dataLayer.eachLayer(function(layer) { //cycle through each layer
         //for the selected period
