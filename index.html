@@ -424,8 +424,6 @@
       drawMap(cult);//call draw map
     });
 
-
-
     //begin drawMap function
     function drawMap(cult) {
       // create Leaflet data layer and add to map
@@ -543,28 +541,10 @@
         value: 5,
         slide: function(event, ui) {
           updateMap(dataLayer, ui.value); //send selected period to updateMap
-          //updateSummaryInfo(ui.value); //send selected period to updateSummaryInfo
         }
       });
 
     } // end sliderUI()
-
-    // //function to update div with synopses of each time period
-    // function updateSummaryInfo(val) {
-    //   //ajax requests to select the div id's and then tell it to replace content
-    //   var timePeriod = $("#time-period"),
-    //     periodOverview = $("#period-summary"),
-    //     periodLink = $("#period-link"),
-    //     periodImage = $("#image")
-    //
-    //   var periodName = summaryMap[val];
-    //   //update the divs with the selected period's summary info
-    //   timePeriod.html(summaryInfo[periodName].time);
-    //   periodOverview.html(summaryInfo[periodName].summary);
-    //   periodLink.html(summaryInfo[periodName].link);
-    //   periodImage.html(summaryInfo[periodName].image);
-    //
-    // } //end updateSummaryInfo
 
     //begin drawLegend
     function drawLegend() {
