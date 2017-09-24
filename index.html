@@ -133,8 +133,6 @@
       z-index: -1;
     }
 
-
-
   </style>
 
 </head>
@@ -184,7 +182,7 @@
   </div>
   <div id="paleomodal" class="modal">
   <div class="modal-content">
-    <div id="xbtn" class="modal-header">
+    <div id="pxbtn" class="modal-header">
       <span class="close">&times;</span>
       <h2><b>Paleoindian (+12,000 - 10,000BP)</b></h2>
     </div>
@@ -292,9 +290,6 @@
   </div>
   </div>
 
-
-
-
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -305,68 +300,68 @@
 
   <script>
   // Get the modal
-  var modal = document.getElementById('paleomodal');
+  var pmodal = document.getElementById('paleomodal');
   // Get the button that opens the modal
-  var btn = document.getElementById("paleobtn");
+  var pbtn = document.getElementById("paleobtn");
   // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+  var pspan = document.getElementsByClassName("close")[0];
   // When the user clicks the button, open the modal
-  btn.onclick = function() {
-      modal.style.display = "block";
+  pbtn.onclick = function() {
+      pmodal.style.display = "block";
   }
   // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-      modal.style.display = "none";
+  pspan.onclick = function() {
+      pmodal.style.display = "none";
   }
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
+      if (event.target == pmodal) {
+          pmodal.style.display = "none";
       }
   }
   //archaic modal
-  var modal = document.getElementById('archaicmodal');
-  var btn = document.getElementById("archaicbtn");
-  var span = document.getElementsByClassName("close")[0];
-  btn.onclick = function() {
-      modal.style.display = "block";
+  var amodal = document.getElementById('archaicmodal');
+  var abtn = document.getElementById("archaicbtn");
+  var aspan = document.getElementsByClassName("close")[0];
+  abtn.onclick = function() {
+      amodal.style.display = "block";
   }
-  span.onclick = function() {
-      modal.style.display = "none";
+  aspan.onclick = function() {
+      amodal.style.display = "none";
   }
   window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
+      if (event.target == amodal) {
+          amodal.style.display = "none";
       }
   }
   //woodland modal
-  var modal = document.getElementById('woodmodal');
-  var btn = document.getElementById("woodbtn");
-  var span = document.getElementsByClassName("close")[0];
-  btn.onclick = function() {
-      modal.style.display = "block";
+  var wmodal = document.getElementById('woodmodal');
+  var wbtn = document.getElementById("woodbtn");
+  var wspan = document.getElementsByClassName("close")[0];
+  wbtn.onclick = function() {
+      wmodal.style.display = "block";
   }
-  span.onclick = function() {
-      modal.style.display = "none";
+  wspan.onclick = function() {
+      wmodal.style.display = "none";
   }
   window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
+      if (event.target == wmodal) {
+          wmodal.style.display = "none";
       }
   }
   //late modal
-  var modal = document.getElementById('latemodal');
-  var btn = document.getElementById("latebtn");
-  var span = document.getElementsByClassName("close")[0];
-  btn.onclick = function() {
-      modal.style.display = "block";
+  var lmodal = document.getElementById('latemodal');
+  var lbtn = document.getElementById("latebtn");
+  var lspan = document.getElementsByClassName("close")[0];
+  lbtn.onclick = function() {
+      lmodal.style.display = "block";
   }
-  span.onclick = function() {
-      modal.style.display = "none";
+  lspan.onclick = function() {
+      lmodal.style.display = "none";
   }
   window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
+      if (event.target == lmodal) {
+          lmodal.style.display = "none";
       }
   }
   //hist modal
