@@ -414,17 +414,6 @@
       "2": "Late Prehistoric",
       "1": "Historic"
     };
-    //period synopses
-    var summaryInfo = {
-      "Historic": {
-        "time": "<b>Historic (300 BP to present)</b>",
-        "summary": "<ul><li>Period begins with arrival of Europeans explorers and settlers in the 1700s</li>" + "<li>Conflict during earliest interactions between Europeans and Native peoples</li>" +
-          "<li>By early 1800s, most land was claimed and roads were being established</li>" + "<li>By the Civil War, has a highly productive agricultural economy</li>" + "<li>Post Civil War, extractive industries like coal mining expanded</li>" +
-          "<li>Tobacco farming increased</li>" + "<li>Horse farms developed</li></ul>",
-        "link": "Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Riverside.htm'>The Farnsley-Moreman Landing</a>",
-        "image": "<img src='images/riverside.gif'/>"
-      }
-    };
 
     $.getJSON("data/kycounties.json", function(count) {
       drawCounty(count);
