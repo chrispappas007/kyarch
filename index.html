@@ -294,6 +294,21 @@
           modal.style.display = "none";
       }
   }
+  //woodland modal
+  var modal = document.getElementById('woodmodal');
+  var btn = document.getElementById("woodbtn");
+  var span = document.getElementsByClassName("close")[0];
+  btn.onclick = function() {
+      modal.style.display = "block";
+  }
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
 
     //map tiles
     // var tile = new L.StamenTileLayer("toner");
