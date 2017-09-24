@@ -224,6 +224,30 @@
     </div>
   </div>
   </div>
+  <div id="woodmodal" class="modal">
+  <div class="modal-content">
+    <div id="xbtn" class="modal-header">
+      <span class="close">&times;</span>
+      <h2><b>Woodland (3,000 to 1,000 BP)</b></h2>
+    </div>
+    <div class="modal-body">
+        <ul style="list-style-type:disc">
+          <li>Began to make pottery</li>
+          <li>Spent more time gardening and cultivated plants became important part of diet</li>
+          <li>Grew plants such as squash, sunflower, goosefoot, and maygrass</li>
+          <li>Built bigger houses and lived in bigger communities</li>
+          <li>Built large earthen enclosures and mounds as a part of religious and ceremonial life</li>
+          <li>Participated in long-distance trade</li>
+          <li>Invention of the Bow and Arrow</li>
+          <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Robbins.htm'>Robbins Mound Complex</a></li>
+        </ul>
+        <div id="image">
+        <p><img src='images/robbins.jpg'/></p>
+      </div>
+    </div>
+  </div>
+  </div>
+
 
 
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
@@ -237,23 +261,18 @@
   <script>
   // Get the modal
   var modal = document.getElementById('paleomodal');
-
   // Get the button that opens the modal
   var btn = document.getElementById("paleobtn");
-
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
-
   // When the user clicks the button, open the modal
   btn.onclick = function() {
       modal.style.display = "block";
   }
-
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
       modal.style.display = "none";
   }
-
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
       if (event.target == modal) {
