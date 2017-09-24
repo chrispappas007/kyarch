@@ -45,6 +45,11 @@
       font-family: Domine, sans-serif;
     }
 
+    .icon-inliner {
+      display: inline-block;
+      cursor: pointer;
+    }
+
     .legend {
       padding: 6px 8px;
       font-size: 1em;
@@ -82,9 +87,9 @@
 
     /* The Modal (background) */
     .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
+        display: none; 
+        position: absolute; /* Stay in place */
+        z-index: 1000; /* Sit on top */
         padding-top: 100px;
         left: 0;
         top: 0;
@@ -105,18 +110,18 @@
     }
 
     /* The Close Button */
-    .close {
-        color: white;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
+    .btn-close {
+      background: #999;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
     }
 
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
+    .btn-close:hover,
+    .btn-close:focus {
         cursor: pointer;
+        background: #c3c3c3;
     }
 
     .modal-header {
@@ -125,13 +130,7 @@
 
     .modal-body {padding: 2px 16px;}
 
-    .image {
-      padding: 100px;
-    }
 
-    /*#map {
-      z-index: -1;
-    }*/
 
   </style>
 
@@ -152,24 +151,24 @@
         <div id="slider-vertical" class='absolute right mr12 mt36' style="height:530px;">
         </div>
         <div class='paleo color-darken75'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Paleoindian <span class='icon-inliner'><svg id="paleobtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>+12,000 - 10,000 BP</p>
+          <p class='txt-h3 txt-bold pt24 ml18'>Paleoindian <span data-target="paleomodal" class='icon-inliner modal-open'><svg id="paleobtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 ml18'>+12,000 - 10,000 BP</p>
         </div>
         <div class='archaic color-gray'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Archaic <span class='icon-inliner'><svg id="archaicbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>10,000 - 3,000 BP</p>
+          <p class='txt-h3 txt-bold pt24 ml18'>Archaic <span data-target="archaicmodal" class='icon-inliner modal-open'><svg id="archaicbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 ml18'>10,000 - 3,000 BP</p>
         </div>
         <div class='wood color-gray-light'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Woodland <span class='icon-inliner'><svg id="woodbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>3,000 - 1,000 BP</p>
+          <p class='txt-h3 txt-bold pt24 ml18'>Woodland <span data-target="woodmodal" class='icon-inliner modal-open'><svg id="woodbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 ml18'>3,000 - 1,000 BP</p>
         </div>
         <div class='latepre color-gray-faint'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Late Prehistoric <span class='icon-inliner'><svg id="latebtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>1,000 - 300 BP</p>
+          <p class='txt-h3 txt-bold pt24 ml18'>Late<br> Prehistoric <span data-target="latemodal" class='icon-inliner modal-open'><svg id="latebtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 ml18'>1,000 - 300 BP</p>
         </div>
         <div class='historic color-white'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Historic <span class='icon-inliner'><svg id="histbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>300 BP - Present</p>
+          <p class='txt-h3 txt-bold pt24 ml18'>Historic <span data-target="histmodal" class='icon-inliner modal-open'><svg id="histbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 ml18'>300 BP - Present</p>
         </div>
         <footer class='mt12 txt-s static bottom'>
           <ul>
@@ -181,95 +180,95 @@
     <div id="map" class='col col--12 col--9-ml viewport-twothirds viewport-full-ml'></div>
   </div>
   <div id="paleomodal" class="modal">
-  <div class="modal-content">
-    <div id="pxbtn" class="modal-header">
-      <span class="close">&times;</span>
-      <h2><b>Paleoindian (+12,000 - 10,000BP)</b></h2>
-    </div>
-    <div class="modal-body">
-        <ul style="list-style-type:disc">
-          <li>Arrived at the end of the last ice age, likely earlier</li>
-          <li>Hunted megafauna such as mammoth, mastodon, and giant bison</li>
-          <li>Lived in small groups and moved frequently</li>
-          <li>Made large, well-crafted spear points</li>
-          <li>Little known about ritual or ceremonial life</li>
-          <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a></li>
-        </ul>
-        <div id="image">
-        <p><img src='images/clovis.jpg'/></p>
+    <div class="modal-content">
+      <div id="pxbtn" class="modal-header mb18">
+        <svg class="icon fr btn-close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use></svg>
+        <h3 class="txt-h3">Paleoindian (+12,000 - 10,000BP)</h3>
       </div>
+      <div class="modal-body">
+        <div class="grid">
+          <div class="col col9">
+            <ul class="txt-ul">
+              <li class="txt-li">Arrived at the end of the last ice age, likely earlier</li>
+              <li class="txt-li">Hunted megafauna such as mammoth, mastodon, and giant bison</li>
+              <li class="txt-li">Lived in small groups and moved frequently</li>
+              <li class="txt-li">Made large, well-crafted spear points</li>
+              <li class="txt-li">Little known about ritual or ceremonial life</li>
+              <li class="txt-li">Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Adams.htm'>The Adams Site</a></li>
+            </ul>
+          </div> <!-- end col9 -->
+          <div class="image col col3 pl18"><img src='images/clovis.jpg'/></div>
+        </div> <!-- end grid -->
+      </div> <!-- end modal body -->
     </div>
-  </div>
-  </div>
+  </div> <!-- end modal -->
   <div id="archaicmodal" class="modal">
-  <div class="modal-content">
-    <div id="xbtn" class="modal-header">
-      <span class="close">&times;</span>
-      <h2><b>Archaic (10,000 to 3,000 BP)</b></h2>
-    </div>
-    <div class="modal-body">
-        <ul style="list-style-type:disc">
-          <li>Extinction of megafauna shifted focus to smaller game – deer, turkey, rabbit</li>
-          <li>Collected wild plant for food and medicine and began to grow small gardens</li>
-          <li>Began to live in one place longer, but usually not more than a few months</li>
-          <li>Used a spearthrower (atlatl) for improved accuracy</li>
-          <li>Plant foods became a greater part of their diet</li>
-          <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Indian+Knoll+Take+Two.htm'>Indian Knoll</a></li>
-        </ul>
-        <div id="image">
-        <p><img src='images/indianknollaerial.jpg'/></p>
+    <div class="modal-content">
+      <div id="xbtn" class="modal-header">
+        <svg class="icon fr btn-close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use></svg>
+        <h3 class="txt-h3">Archaic (10,000 to 3,000 BP)</h3>
+      </div>
+      <div class="modal-body">
+          <ul class="txt-ul">
+            <li>Extinction of megafauna shifted focus to smaller game – deer, turkey, rabbit</li>
+            <li>Collected wild plant for food and medicine and began to grow small gardens</li>
+            <li>Began to live in one place longer, but usually not more than a few months</li>
+            <li>Used a spearthrower (atlatl) for improved accuracy</li>
+            <li>Plant foods became a greater part of their diet</li>
+            <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Indian+Knoll+Take+Two.htm'>Indian Knoll</a></li>
+          </ul>
+          <div class="image">
+          <p><img src='images/indianknollaerial.jpg'/></p>
+        </div>
       </div>
     </div>
-  </div>
   </div>
   <div id="woodmodal" class="modal">
-  <div class="modal-content">
-    <div id="xbtn" class="modal-header">
-      <span class="close">&times;</span>
-      <h2><b>Woodland (3,000 to 1,000 BP)</b></h2>
-    </div>
-    <div class="modal-body">
-        <ul style="list-style-type:disc">
-          <li>Began to make pottery</li>
-          <li>Spent more time gardening and cultivated plants became important part of diet</li>
-          <li>Grew plants such as squash, sunflower, goosefoot, and maygrass</li>
-          <li>Built bigger houses and lived in bigger communities</li>
-          <li>Built large earthen enclosures and mounds as a part of religious and ceremonial life</li>
-          <li>Participated in long-distance trade</li>
-          <li>Invention of the Bow and Arrow</li>
-          <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Robbins.htm'>Robbins Mound Complex</a></li>
-        </ul>
-        <div id="image">
-        <p><img src='images/robbins.jpg'/></p>
+    <div class="modal-content">
+      <div id="xbtn" class="modal-header">
+        <svg class="icon fr btn-close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use></svg>
+        <h2><b>Woodland (3,000 to 1,000 BP)</b></h2>
+      </div>
+      <div class="modal-body">
+          <ul style="list-style-type:disc">
+            <li>Began to make pottery</li>
+            <li>Spent more time gardening and cultivated plants became important part of diet</li>
+            <li>Grew plants such as squash, sunflower, goosefoot, and maygrass</li>
+            <li>Built bigger houses and lived in bigger communities</li>
+            <li>Built large earthen enclosures and mounds as a part of religious and ceremonial life</li>
+            <li>Participated in long-distance trade</li>
+            <li>Invention of the Bow and Arrow</li>
+            <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Robbins.htm'>Robbins Mound Complex</a></li>
+          </ul>
+          <div class="image">
+          <p><img src='images/robbins.jpg'/></p>
+        </div>
       </div>
     </div>
-  </div>
   </div>
   <div id="latemodal" class="modal">
-  <div class="modal-content">
-    <div id="xbtn" class="modal-header">
-      <span class="close">&times;</span>
-      <h2><b>Late Prehistoric (1,000 – 300 BP)</b></h2>
-    </div>
-    <div class="modal-body">
-        <ul style="list-style-type:disc">
-          <li>Two main groups – Mississippian in western Kentucky and Fort Ancient in eastern Kentucky</li>
-          <li>Village life revolved around corn and bean agriculture</li>
-          <li>Developed the hoe for farming</li>
-          <li>Lived in large year-round settlements, many with a stockade</li>
-          <li>Communities ruled by hereditary chiefs</li>
-          <li>Learn more: Fort Ancient: <a href='http://heritage.ky.gov/kas/kyarchynew/Cox+Site.htm'>The Cox Site</a>; Mississippian: <a href='http://heritage.ky.gov/kas/kyarchynew/Jonathan+Creek.htm'>Jonathan Creek</a></li>
-        </ul>
-        <div id="image">
-        <p><img src='images/jonathan.jpg'/></p>
+    <div class="modal-content">
+      <div id="xbtn" class="modal-header">
+        <svg class="icon fr btn-close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use></svg>
+        <h2><b>Late Prehistoric (1,000 – 300 BP)</b></h2>
+      </div>
+      <div class="modal-body">
+          <ul style="list-style-type:disc">
+            <li>Two main groups – Mississippian in western Kentucky and Fort Ancient in eastern Kentucky</li>
+            <li>Village life revolved around corn and bean agriculture</li>
+            <li>Developed the hoe for farming</li>
+            <li>Lived in large year-round settlements, many with a stockade</li>
+            <li>Communities ruled by hereditary chiefs</li>
+            <li>Learn more: Fort Ancient: <a href='http://heritage.ky.gov/kas/kyarchynew/Cox+Site.htm'>The Cox Site</a>; Mississippian: <a href='http://heritage.ky.gov/kas/kyarchynew/Jonathan+Creek.htm'>Jonathan Creek</a></li>
+          </ul>
+          <div class="image"><img src='images/jonathan.jpg'/></div>
       </div>
     </div>
-  </div>
   </div>
   <div id="histmodal" class="modal">
   <div class="modal-content">
     <div id="xbtn" class="modal-header">
-      <span class="close">&times;</span>
+      <svg class="icon fr btn-close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use></svg>
       <h2><b>Historic (300 BP to present)</b></h2>
     </div>
     <div class="modal-body">
@@ -283,7 +282,7 @@
           <li>Horse farms developed</li>
           <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Riverside.htm'>The Farnsley-Moreman Landing</a></li>
         </ul>
-        <div id="image">
+        <div class="image">
         <p><img src='images/riverside.gif'/></p>
       </div>
     </div>
@@ -299,86 +298,31 @@
   <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
 
   <script>
-  // Get the modal
-  var pmodal = document.getElementById('paleomodal');
-  // Get the button that opens the modal
-  var pbtn = document.getElementById("paleobtn");
-  // Get the <span> element that closes the modal
-  var pspan = document.getElementsByClassName("close")[0];
-  // When the user clicks the button, open the modal
-  pbtn.onclick = function() {
-      pmodal.style.display = "block";
-  }
-  // When the user clicks on <span> (x), close the modal
-  pspan.onclick = function() {
-      pmodal.style.display = "none";
-  }
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-      if (event.target == pmodal) {
-          pmodal.style.display = "none";
-      }
-  }
-  //archaic modal
-  var amodal = document.getElementById('archaicmodal');
-  var abtn = document.getElementById("archaicbtn");
-  var aspan = document.getElementsByClassName("close")[0];
-  abtn.onclick = function() {
-      amodal.style.display = "block";
-  }
-  aspan.onclick = function() {
-      amodal.style.display = "none";
-  }
-  window.onclick = function(event) {
-      if (event.target == amodal) {
-          amodal.style.display = "none";
-      }
-  }
-  //woodland modal
-  var wmodal = document.getElementById('woodmodal');
-  var wbtn = document.getElementById("woodbtn");
-  var wspan = document.getElementsByClassName("close")[0];
-  wbtn.onclick = function() {
-      wmodal.style.display = "block";
-  }
-  wspan.onclick = function() {
-      wmodal.style.display = "none";
-  }
-  window.onclick = function(event) {
-      if (event.target == wmodal) {
-          wmodal.style.display = "none";
-      }
-  }
-  //late modal
-  var lmodal = document.getElementById('latemodal');
-  var lbtn = document.getElementById("latebtn");
-  var lspan = document.getElementsByClassName("close")[0];
-  lbtn.onclick = function() {
-      lmodal.style.display = "block";
-  }
-  lspan.onclick = function() {
-      lmodal.style.display = "none";
-  }
-  window.onclick = function(event) {
-      if (event.target == lmodal) {
-          lmodal.style.display = "none";
-      }
-  }
-  //hist modal
-  var modal = document.getElementById('histmodal');
-  var btn = document.getElementById("histbtn");
-  var span = document.getElementsByClassName("close")[0];
-  btn.onclick = function() {
-      modal.style.display = "block";
-  }
-  span.onclick = function() {
-      modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
-  }
+
+    // select all modal-open elements
+    var modalOpen = $('.modal-open');
+
+    // when user clicks on a modal-open button
+    modalOpen.on('click touch', function(e) {
+      
+      // get the data-target value from the clicked element
+      var targetModal = $(this).attr('data-target'); // will be 'paleomodal', etc
+      
+      // use this to select the modal with that id value and fade the element in
+      console.log(targetModal)
+      $('#' + targetModal).fadeIn();
+    })
+
+    // select all the close buttons and modals
+    var closeButton = $('.btn-close, .modal');
+    // when user clicks
+    closeButton.on('click touch', function(e) {
+      // fadeOut any modal that's open (i.e., the open one)
+      $('.modal').fadeOut();
+
+    });
+  
+
 
     //map tiles
     // var tile = new L.StamenTileLayer("toner");
