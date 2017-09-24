@@ -268,6 +268,29 @@
     </div>
   </div>
   </div>
+  <div id="histmodal" class="modal">
+  <div class="modal-content">
+    <div id="xbtn" class="modal-header">
+      <span class="close">&times;</span>
+      <h2><b>Historic (300 BP to present)</b></h2>
+    </div>
+    <div class="modal-body">
+        <ul style="list-style-type:disc">
+          <li>Period begins with arrival of Europeans explorers and settlers in the 1700s</li>
+          <li>Conflict during earliest interactions between Europeans and Native peoples</li>
+          <li>By early 1800s, most land was claimed and roads were being established</li>
+          <li>By the Civil War, has a highly productive agricultural economy</li>
+          <li>Post Civil War, extractive industries like coal mining expanded</li>
+          <li>Tobacco farming increased</li>
+          <li>Horse farms developed</li>
+          <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Riverside.htm'>The Farnsley-Moreman Landing</a></li>
+        </ul>
+        <div id="image">
+        <p><img src='images/riverside.gif'/></p>
+      </div>
+    </div>
+  </div>
+  </div>
 
 
 
@@ -334,6 +357,21 @@
   //late modal
   var modal = document.getElementById('latemodal');
   var btn = document.getElementById("latebtn");
+  var span = document.getElementsByClassName("close")[0];
+  btn.onclick = function() {
+      modal.style.display = "block";
+  }
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+  //hist modal
+  var modal = document.getElementById('histmodal');
+  var btn = document.getElementById("histbtn");
   var span = document.getElementsByClassName("close")[0];
   btn.onclick = function() {
       modal.style.display = "block";
