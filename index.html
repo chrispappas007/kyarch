@@ -139,6 +139,47 @@
 
 <body>
 
+  <div class='grid'>
+    <div class='col col--12'>
+      <div class='h-full prose prose--dark bg-gray'>
+        <h1 id="title-box" class='align-center py18'>Where in the Past? Archaeological Cultures in Kentucky</h>
+      </div>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
+      <div class='h-full prose prose--dark bg-gray relative scroll-auto'>
+        <div id="slider-vertical" class='absolute right mr12 mt36' style="height:530px;">
+        </div>
+        <div class='paleo color-darken75'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Paleoindian <span class='icon-inliner'><svg id="paleobtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 px30 ml24'>+12,000 - 10,000 BP</p>
+        </div>
+        <div class='archaic color-gray'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Archaic <span class='icon-inliner'><svg id="archaicbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 px30 ml24'>10,000 - 3,000 BP</p>
+        </div>
+        <div class='wood color-gray-light'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Woodland <span class='icon-inliner'><svg id="woodbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 px30 ml24'>3,000 - 1,000 BP</p>
+        </div>
+        <div class='latepre color-gray-faint'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Late Prehistoric <span class='icon-inliner'><svg id="latebtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 px30 ml24'>1,000 - 300 BP</p>
+        </div>
+        <div class='historic color-white'>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Historic <span class='icon-inliner'><svg id="histbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h5 pb24 px30 ml24'>300 BP - Present</p>
+        </div>
+        <footer class='mt12 txt-s static bottom'>
+          <ul>
+            <li>For more information visit the <a class='link' href='https://anthropology.as.uky.edu/office-state-archaeology'>Office of State Archaeology</a> and the <a class='link' href='http://heritage.ky.gov/default.htm'>Kentucky Heritage Council</a>.</li>
+            </p>
+        </footer>
+      </div>
+    </div>
+    <div id="map" class='col col--12 col--9-ml viewport-twothirds viewport-full-ml'></div>
+  </div>
   <div id="paleomodal" class="modal">
   <div class="modal-content">
     <div id="pxbtn" class="modal-header">
@@ -247,47 +288,6 @@
       </div>
     </div>
   </div>
-  </div>
-  <div class='grid'>
-    <div class='col col--12'>
-      <div class='h-full prose prose--dark bg-gray'>
-        <h1 id="title-box" class='align-center py18'>Where in the Past? Archaeological Cultures in Kentucky</h>
-      </div>
-    </div>
-  </div>
-  <div class='grid'>
-    <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
-      <div class='h-full prose prose--dark bg-gray relative scroll-auto'>
-        <div id="slider-vertical" class='absolute right mr12 mt36' style="height:530px;">
-        </div>
-        <div class='paleo color-darken75'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Paleoindian <span class='icon-inliner'><svg id="paleobtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>+12,000 - 10,000 BP</p>
-        </div>
-        <div class='archaic color-gray'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Archaic <span class='icon-inliner'><svg id="archaicbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>10,000 - 3,000 BP</p>
-        </div>
-        <div class='wood color-gray-light'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Woodland <span class='icon-inliner'><svg id="woodbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>3,000 - 1,000 BP</p>
-        </div>
-        <div class='latepre color-gray-faint'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Late Prehistoric <span class='icon-inliner'><svg id="latebtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>1,000 - 300 BP</p>
-        </div>
-        <div class='historic color-white'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Historic <span class='icon-inliner'><svg id="histbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
-          <p class='txt-h5 pb24 px30 ml24'>300 BP - Present</p>
-        </div>
-        <footer class='mt12 txt-s static bottom'>
-          <ul>
-            <li>For more information visit the <a class='link' href='https://anthropology.as.uky.edu/office-state-archaeology'>Office of State Archaeology</a> and the <a class='link' href='http://heritage.ky.gov/default.htm'>Kentucky Heritage Council</a>.</li>
-            </p>
-        </footer>
-      </div>
-    </div>
-    <div id="map" class='col col--12 col--9-ml viewport-twothirds viewport-full-ml'></div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
