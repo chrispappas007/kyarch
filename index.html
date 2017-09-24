@@ -247,6 +247,28 @@
     </div>
   </div>
   </div>
+  <div id="latemodal" class="modal">
+  <div class="modal-content">
+    <div id="xbtn" class="modal-header">
+      <span class="close">&times;</span>
+      <h2><b>Late Prehistoric (1,000 – 300 BP)</b></h2>
+    </div>
+    <div class="modal-body">
+        <ul style="list-style-type:disc">
+          <li>Two main groups – Mississippian in western Kentucky and Fort Ancient in eastern Kentucky</li>
+          <li>Village life revolved around corn and bean agriculture</li>
+          <li>Developed the hoe for farming</li>
+          <li>Lived in large year-round settlements, many with a stockade</li>
+          <li>Communities ruled by hereditary chiefs</li>
+          <li>Learn more: Fort Ancient: <a href='http://heritage.ky.gov/kas/kyarchynew/Cox+Site.htm'>The Cox Site</a>; Mississippian: <a href='http://heritage.ky.gov/kas/kyarchynew/Jonathan+Creek.htm'>Jonathan Creek</a></li>
+        </ul>
+        <div id="image">
+        <p><img src='images/jonathan.jpg'/></p>
+      </div>
+    </div>
+  </div>
+  </div>
+
 
 
 
@@ -297,6 +319,21 @@
   //woodland modal
   var modal = document.getElementById('woodmodal');
   var btn = document.getElementById("woodbtn");
+  var span = document.getElementsByClassName("close")[0];
+  btn.onclick = function() {
+      modal.style.display = "block";
+  }
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+  //late modal
+  var modal = document.getElementById('latemodal');
+  var btn = document.getElementById("latebtn");
   var span = document.getElementsByClassName("close")[0];
   btn.onclick = function() {
       modal.style.display = "block";
