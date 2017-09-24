@@ -154,23 +154,23 @@
         <div id="slider-vertical" class='absolute right mr12 mt36' style="height:530px;">
         </div>
         <div class='paleo color-darken75'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Paleoindian<span class='icon-inliner'><svg id="btn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Paleoindian <span class='icon-inliner'><svg id="paleobtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
           <p class='txt-h5 pb24 px30 ml24'>+12,000 - 10,000 BP</p>
         </div>
         <div class='archaic color-gray'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Archaic</p>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Archaic <span class='icon-inliner'><svg id="archaicbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
           <p class='txt-h5 pb24 px30 ml24'>10,000 - 3,000 BP</p>
         </div>
         <div class='wood color-gray-light'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Woodland</p>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Woodland <span class='icon-inliner'><svg id="woodbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
           <p class='txt-h5 pb24 px30 ml24'>3,000 - 1,000 BP</p>
         </div>
         <div class='latepre color-gray-faint'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Late Prehistoric</p>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Late Prehistoric <span class='icon-inliner'><svg id="latebtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
           <p class='txt-h5 pb24 px30 ml24'>1,000 - 300 BP</p>
         </div>
         <div class='historic color-white'>
-          <p class='txt-h3 txt-bold pt24 px30 ml24'>Historic</p>
+          <p class='txt-h3 txt-bold pt24 px30 ml24'>Historic <span class='icon-inliner'><svg id="histbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
           <p class='txt-h5 pb24 px30 ml24'>300 BP - Present</p>
         </div>
         <footer class='mt12 txt-s static bottom'>
@@ -180,12 +180,9 @@
         </footer>
       </div>
     </div>
-    <div class='col col--12 col--9-ml viewport-twothirds viewport-full-ml'>
-      <div id="map"></div>
+    <div id="map" class='col col--12 col--9-ml viewport-twothirds viewport-full-ml'></div>
   </div>
-  </div>
-  <div id="myModal" class="modal">
-
+  <div id="paleomodal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
     <div id="xbtn" class="modal-header">
@@ -219,10 +216,10 @@
 
   <script>
   // Get the modal
-  var modal = document.getElementById('myModal');
+  var modal = document.getElementById('paleomodal');
 
   // Get the button that opens the modal
-  var btn = document.getElementById("btn");
+  var btn = document.getElementById("paleobtn");
 
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
