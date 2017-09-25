@@ -411,12 +411,12 @@
        $.getJSON('data/hexgridonedeg.json')
    ).done(function(count, cult){
       //  drawMap(cult, count);
-       drawCounty(cult, count);
+       drawMap(cult, count);
    });
 
 
     //begin drawMap function
-    function drawMap(cult) {
+    function drawMap(cult, count) {
       // create Leaflet data layer and add to map
       dataLayer = L.geoJson(cult, {
         style: function(feature) {
@@ -445,13 +445,13 @@
           })
         })
       });
-      // drawCounty(count);
+      drawCounty(count);
       drawLegend();
       sliderUI(dataLayer);
       updateMap(dataLayer, '5');
     }//end drawMap
 
-    function drawCounty(cult, count) {
+    function drawCounty(count) {
       county = L.geoJson(count, {
         style: function(feature) {
           return {
@@ -470,7 +470,6 @@
         collapsed: false,
         position:'topleft'
       }).addTo(map);
-      drawMap(cult);
     };
 
     //create class breaks for data
