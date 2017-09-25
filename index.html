@@ -294,7 +294,6 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
-  <!-- <script src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script> -->
   <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
 
   <script>
@@ -369,23 +368,24 @@
       "1": "Historic"
     };
 
-
-    var county = $.getJSON("data/kycounties.json", function(count) {
-      drawCounty(count);
-    });
-
-    var overlayMaps = {
-        "County": county
-    };
+    var county = {};
 
 
-    $.getJSON("data/hexgridonedeg.json", function(cult) {
-      drawMap(cult);//call draw map
-    });
+    $.when(
+       $.getJSON('data/kycounties.json'),
+       $.getJSON('data/hexgridonedeg.json')
+   ).done(function(count, cult){
+       drawCounty(count);
+       drawMap(cult);
+   });
+
+  //  var overlayMaps = {
+  //      "County": county
+  //  };
+
+   L.control.layers(baseMaps, county).addTo(map);
 
     //AJAX request to load data
-
-    L.control.layers(baseMaps, overlayMaps).addTo(map);
 
     //begin drawMap function
     function drawMap(cult) {
