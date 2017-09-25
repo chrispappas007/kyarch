@@ -115,7 +115,7 @@
         margin: auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 75%;
+        width: 60%;
     }
 
     /* The Close Button */
@@ -356,10 +356,10 @@
     //map tiles
     // var tile = new L.StamenTileLayer("toner");
     var graytile = new L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
-	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-	subdomains: 'abcd',
-	maxZoom: 19
-});
+    	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+    	subdomains: 'abcd',
+    	maxZoom: 19
+    });
 
     var terraintile = new L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
     	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -410,12 +410,13 @@
        $.getJSON('data/kycounties.json'),
        $.getJSON('data/hexgridonedeg.json')
    ).done(function(count, cult){
-       drawMap(cult, count);
+      //  drawMap(cult, count);
+       drawCounty(cult, count);
    });
 
 
     //begin drawMap function
-    function drawMap(cult, count) {
+    function drawMap(cult) {
       // create Leaflet data layer and add to map
       dataLayer = L.geoJson(cult, {
         style: function(feature) {
@@ -425,7 +426,7 @@
             weight: 1,
             fillOpacity: .4,
             fillColor: '#1f78b4',
-            zIndex: 500
+            zIndex: 600
           };
         }
       }).addTo(map); //add it to the map
@@ -444,13 +445,13 @@
           })
         })
       });
-      drawCounty(count);
+      // drawCounty(count);
       drawLegend();
       sliderUI(dataLayer);
       updateMap(dataLayer, '5');
     }//end drawMap
 
-    function drawCounty(count) {
+    function drawCounty(cult, count) {
       county = L.geoJson(count, {
         style: function(feature) {
           return {
@@ -469,6 +470,7 @@
         collapsed: false,
         position:'topleft'
       }).addTo(map);
+      drawMap(cult);
     };
 
     //create class breaks for data
