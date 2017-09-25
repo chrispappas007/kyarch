@@ -22,26 +22,35 @@
 
     .paleo {
       background: #ffffcc;
+      opacity: .7;
       font-family: Domine, sans-serif;
     }
 
     .archaic {
       background: #a1dab4;
+      opacity: .7;
+
       font-family: Domine, sans-serif;
     }
 
     .wood {
       background: #41b6c4;
+      opacity: .7;
+
       font-family: Domine, sans-serif;
     }
 
     .latepre {
       background: #2c7fb8;
+      opacity: .7;
+
       font-family: Domine, sans-serif;
     }
 
     .historic {
       background: #253494;
+      opacity: .7;
+
       font-family: Domine, sans-serif;
     }
 
@@ -147,8 +156,8 @@
   </div>
   <div class='grid'>
     <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
-      <div class='h-full prose prose--dark bg-gray relative scroll-auto'>
-        <div id="slider-vertical" class='absolute right mr12 mt36' style="height:530px;">
+      <div class='h-full relative scroll-auto'>
+        <div id="slider-vertical" class='absolute right mr12 mt36' style="height:500px;">
         </div>
         <div class='paleo color-darken75'>
           <p class='txt-h3 txt-bold pt24 ml18'>Paleoindian <span data-target="paleomodal" class='icon-inliner modal-open'><svg id="paleobtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
@@ -170,9 +179,9 @@
           <p class='txt-h3 txt-bold pt24 ml18'>Historic <span data-target="histmodal" class='icon-inliner modal-open'><svg id="histbtn" class='icon'><use xlink:href='#icon-info'/></svg></span></p>
           <p class='txt-h5 pb24 ml18'>300 BP - Present</p>
         </div>
-        <footer class='mt12 txt-s static bottom'>
+        <footer class='color-white bg-gray py24 px12 txt-s static bottom'>
           <ul>
-            <li>For more information visit the <a class='link' href='https://anthropology.as.uky.edu/office-state-archaeology'>Office of State Archaeology</a> and the <a class='link' href='http://heritage.ky.gov/default.htm'>Kentucky Heritage Council</a>.</li>
+            <li>For more information visit the <a class='link link--white' href='https://anthropology.as.uky.edu/office-state-archaeology'>Office of State Archaeology</a> and the <a class='link link--white' href='http://heritage.ky.gov/default.htm'>Kentucky Heritage Council</a>.</li>
             </p>
         </footer>
       </div>
@@ -413,8 +422,9 @@
           return {
             color: '#dddddd',
             weight: 2,
-            fillOpacity: .5,
-            fillColor: '#1f78b4'
+            fillOpacity: .4,
+            fillColor: '#1f78b4',
+            zIndex: 500
           };
         }
       }).addTo(map); //add it to the map
@@ -444,10 +454,9 @@
         style: function(feature) {
           return {
             color: '#808080',
-            weight: 1,
-            fillOpacity: 0
-            //fillColor: '#1f78b4'
-
+            weight: .5,
+            fillOpacity: 0,
+            zIndex: 400
           };
         }
       }).addTo(map);
