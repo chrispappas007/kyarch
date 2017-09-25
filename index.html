@@ -424,10 +424,14 @@
             weight: 1,
             fillOpacity: .6,
             fillColor: '#1f78b4',
-            zIndex: 600
+            zIndex: 800
           };
         }
       }).addTo(map); //add it to the map
+
+      map.getPane(dataLayer, {
+        overlayPane: 600
+      });
 
       map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
 
@@ -468,6 +472,11 @@
         collapsed: false,
         position:'topleft'
       }).addTo(map);
+
+      map.getPane(count, {
+        overlayPane: 400
+      });
+
     };
 
     //create class breaks for data
