@@ -336,8 +336,9 @@
     });
 
     var baseMaps = {
-        "Grayscale": graytile,
-        "Terrain": terraintile
+        "Terrain": terraintile,
+        "Grayscale": graytile
+
     };
 
     // create the Leaflet map with tiles
@@ -349,7 +350,8 @@
       zoomControl: false,
       layers: [graytile, terraintile]
     });
-    map.addLayer(graytile, terraintile);
+    
+    map.addLayer(graytile);
 
     //variable to associate periods with stops on the slider
     var periodMap = {
@@ -368,31 +370,23 @@
       "1": "Historic"
     };
 
-    var county = {};
-
+    // define globals here
+    var county;
+    var dataLayer
 
     $.when(
        $.getJSON('data/kycounties.json'),
        $.getJSON('data/hexgridonedeg.json')
    ).done(function(count, cult){
-       drawCounty(count);
-       drawMap(cult);
+       drawMap(cult, count);
    });
-
-  //  var overlayMaps = {
-  //      "County": county
-  //  };
-
-   L.control.layers(baseMaps, county, {
-     sortLayers: true
-   }).addTo(map);
 
     //AJAX request to load data
 
     //begin drawMap function
-    function drawMap(cult) {
+    function drawMap(cult, count) {
       // create Leaflet data layer and add to map
-      var dataLayer = L.geoJson(cult, {
+      dataLayer = L.geoJson(cult, {
         style: function(feature) {
           // style hexagons with initial default path options
           return {
@@ -419,13 +413,16 @@
         })
       });
 
-      drawLegend();
+
       sliderUI(dataLayer);
+      drawCounty(count);
+      drawLegend();
       updateMap(dataLayer, '5');
+
     }//end drawMap
 
     function drawCounty(count) {
-      var county = L.geoJson(count, {
+      county = L.geoJson(count, {
         style: function(feature) {
           return {
             color: '#808080',
@@ -435,6 +432,14 @@
 
           };
         }
+      }).addTo(map);
+
+      var countyControl = {
+        "County borders": county
+      }
+
+      L.control.layers(baseMaps, countyControl, {
+        collapsed: false
       }).addTo(map);
     };
 
