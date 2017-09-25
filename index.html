@@ -218,7 +218,7 @@
             <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Indian+Knoll+Take+Two.htm'>Indian Knoll</a></li>
           </ul>
           <div class="image">
-          <p><img src='images/indianknollaerial.jpg'/></p>
+            <p><img src='images/indianknollaerial.jpg'/></p>
         </div>
       </div>
     </div>
@@ -227,10 +227,10 @@
     <div class="modal-content">
       <div id="xbtn" class="modal-header">
         <svg class="icon fr btn-close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use></svg>
-        <h2><b>Woodland (3,000 to 1,000 BP)</b></h2>
+        <h3 class="txt-h3">Woodland (3,000 to 1,000 BP)</h3>
       </div>
       <div class="modal-body">
-          <ul style="list-style-type:disc">
+          <ul class="txt-ul">
             <li>Began to make pottery</li>
             <li>Spent more time gardening and cultivated plants became important part of diet</li>
             <li>Grew plants such as squash, sunflower, goosefoot, and maygrass</li>
@@ -241,7 +241,7 @@
             <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Robbins.htm'>Robbins Mound Complex</a></li>
           </ul>
           <div class="image">
-          <p><img src='images/robbins.jpg'/></p>
+            <p><img src='images/robbins.jpg'/></p>
         </div>
       </div>
     </div>
@@ -250,10 +250,10 @@
     <div class="modal-content">
       <div id="xbtn" class="modal-header">
         <svg class="icon fr btn-close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use></svg>
-        <h2><b>Late Prehistoric (1,000 – 300 BP)</b></h2>
+        <h3 class="txt-h3">Late Prehistoric (1,000 – 300 BP)</h3>
       </div>
       <div class="modal-body">
-          <ul style="list-style-type:disc">
+          <ul class="txt-ul">
             <li>Two main groups – Mississippian in western Kentucky and Fort Ancient in eastern Kentucky</li>
             <li>Village life revolved around corn and bean agriculture</li>
             <li>Developed the hoe for farming</li>
@@ -269,10 +269,10 @@
   <div class="modal-content">
     <div id="xbtn" class="modal-header">
       <svg class="icon fr btn-close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use></svg>
-      <h2><b>Historic (300 BP to present)</b></h2>
+      <h3 class="txt-h3">Historic (300 BP to present)</h3>
     </div>
     <div class="modal-body">
-        <ul style="list-style-type:disc">
+        <ul class="txt-ul">
           <li>Period begins with arrival of Europeans explorers and settlers in the 1700s</li>
           <li>Conflict during earliest interactions between Europeans and Native peoples</li>
           <li>By early 1800s, most land was claimed and roads were being established</li>
@@ -283,7 +283,7 @@
           <li>Learn more: <a href='http://heritage.ky.gov/kas/kyarchynew/Riverside.htm'>The Farnsley-Moreman Landing</a></li>
         </ul>
         <div class="image">
-        <p><img src='images/riverside.gif'/></p>
+          <p><img src='images/riverside.gif'/></p>
       </div>
     </div>
   </div>
@@ -384,10 +384,9 @@
   //  };
 
    L.control.layers(baseMaps, county, {
-     sortLayers: true
+     sortLayers: true,
+     position: 'topleft'
    }).addTo(map);
-
-    //AJAX request to load data
 
     //begin drawMap function
     function drawMap(cult) {
