@@ -383,7 +383,9 @@
   //      "County": county
   //  };
 
-   L.control.layers(baseMaps, county).addTo(map);
+   L.control.layers(baseMaps, county, {
+     sortLayers: true
+   }).addTo(map);
 
     //AJAX request to load data
 
