@@ -332,7 +332,6 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
-  <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
 
   <script>
 
@@ -385,10 +384,13 @@
       center: [-84.506667, 37.358333],
       minZoom: 7,
       zoom: 7,
-      zoomControl: false,
-      layers: [graytile, terraintile]
+      zoomControl: false
     });
     map.addLayer(graytile);
+
+    map.createPane('counties');
+    map.getPane('counties').style.zIndex = 300;
+    map.getPane('counties').style.pointerEvents = 'none';
 
     //variable to associate periods with stops on the slider
     var periodMap = {
@@ -421,6 +423,29 @@
 
     //begin drawMap function
     function drawMap(cult, count) {
+
+      county = L.geoJson(count, {
+        style: function(feature) {
+          return {
+            color: '#808080',
+            weight: .5,
+            fillOpacity: 0,
+            zIndex: 450
+          };
+        },
+        pane: 'counties'
+      }).addTo(map);
+
+      var countyControl = {
+       "County borders": county
+      }
+
+      L.control.layers(baseMaps, countyControl, {
+        collapsed: false,
+        position:'topleft'
+      }).addTo(map);
+
+
       // create Leaflet data layer and add to map
       dataLayer = L.geoJson(cult, {
         style: function(feature) {
@@ -434,10 +459,6 @@
           };
         }
       }).addTo(map); //add it to the map
-
-      map.getPane(dataLayer, {
-        overlayPane: 600
-      });
 
       map.fitBounds(dataLayer.getBounds()); //have the map drawn to fit window
 
@@ -453,37 +474,11 @@
           })
         })
       });
-      drawCounty(count);
+
       drawLegend();
       sliderUI(dataLayer);
       updateMap(dataLayer, '5');
     }//end drawMap
-
-    function drawCounty(count) {
-      county = L.geoJson(count, {
-        style: function(feature) {
-          return {
-            color: '#808080',
-            weight: .5,
-            fillOpacity: 0,
-            zIndex: 400
-          };
-        }
-      }).addTo(map);
-      var countyControl = {
-       "County borders": county
-     }
-
-      L.control.layers(baseMaps, countyControl, {
-        collapsed: false,
-        position:'topleft'
-      }).addTo(map);
-
-      map.getPane(count, {
-        overlayPane: 400
-      });
-
-    };
 
     //create class breaks for data
     function getClassBreaks(dataLayer, currentPeriod) {
