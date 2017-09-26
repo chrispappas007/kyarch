@@ -428,7 +428,7 @@
         style: function(feature) {
           return {
             color: '#808080',
-            weight: .5,
+            weight: 1,
             fillOpacity: 0,
             zIndex: 450
           };
@@ -444,7 +444,6 @@
         collapsed: false,
         position:'topleft'
       }).addTo(map);
-
 
       // create Leaflet data layer and add to map
       dataLayer = L.geoJson(cult, {
